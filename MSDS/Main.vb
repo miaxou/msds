@@ -9,6 +9,7 @@ Public Class Main
         'present.
         Try
             Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            ChemTblBindingSource.Sort = "chemMan"
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
@@ -43,6 +44,7 @@ Public Class Main
     Public Sub refreshData()
         'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
         Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        ChemTblBindingSource.Sort = "chemMan"
     End Sub
 
     Private Sub searchBox_Enter(sender As Object, e As EventArgs) Handles searchBox.Enter
