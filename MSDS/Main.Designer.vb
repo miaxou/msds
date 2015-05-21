@@ -27,10 +27,6 @@ Partial Class Main
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.searchBox = New System.Windows.Forms.TextBox()
         Me.msdsGrid = New System.Windows.Forms.DataGridView()
-        Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -41,6 +37,10 @@ Partial Class Main
         Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
+        Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,40 +92,6 @@ Partial Class Main
         Me.msdsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.msdsGrid.Size = New System.Drawing.Size(297, 461)
         Me.msdsGrid.TabIndex = 1
-        '
-        'KeyDataGridViewTextBoxColumn
-        '
-        Me.KeyDataGridViewTextBoxColumn.DataPropertyName = "key"
-        Me.KeyDataGridViewTextBoxColumn.HeaderText = "key"
-        Me.KeyDataGridViewTextBoxColumn.Name = "KeyDataGridViewTextBoxColumn"
-        Me.KeyDataGridViewTextBoxColumn.ReadOnly = True
-        Me.KeyDataGridViewTextBoxColumn.Visible = False
-        Me.KeyDataGridViewTextBoxColumn.Width = 30
-        '
-        'ChemNameDataGridViewTextBoxColumn
-        '
-        Me.ChemNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ChemNameDataGridViewTextBoxColumn.DataPropertyName = "chemName"
-        Me.ChemNameDataGridViewTextBoxColumn.HeaderText = "Name"
-        Me.ChemNameDataGridViewTextBoxColumn.Name = "ChemNameDataGridViewTextBoxColumn"
-        Me.ChemNameDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ChemManDataGridViewTextBoxColumn
-        '
-        Me.ChemManDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ChemManDataGridViewTextBoxColumn.DataPropertyName = "chemMan"
-        Me.ChemManDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
-        Me.ChemManDataGridViewTextBoxColumn.Name = "ChemManDataGridViewTextBoxColumn"
-        Me.ChemManDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ChemPathDataGridViewTextBoxColumn
-        '
-        Me.ChemPathDataGridViewTextBoxColumn.DataPropertyName = "chemPath"
-        Me.ChemPathDataGridViewTextBoxColumn.HeaderText = "chemPath"
-        Me.ChemPathDataGridViewTextBoxColumn.Name = "ChemPathDataGridViewTextBoxColumn"
-        Me.ChemPathDataGridViewTextBoxColumn.ReadOnly = True
-        Me.ChemPathDataGridViewTextBoxColumn.Visible = False
-        Me.ChemPathDataGridViewTextBoxColumn.Width = 80
         '
         'ChemTblBindingSource
         '
@@ -205,6 +171,40 @@ Partial Class Main
         '
         Me.EventLog1.SynchronizingObject = Me
         '
+        'KeyDataGridViewTextBoxColumn
+        '
+        Me.KeyDataGridViewTextBoxColumn.DataPropertyName = "key"
+        Me.KeyDataGridViewTextBoxColumn.HeaderText = "key"
+        Me.KeyDataGridViewTextBoxColumn.Name = "KeyDataGridViewTextBoxColumn"
+        Me.KeyDataGridViewTextBoxColumn.ReadOnly = True
+        Me.KeyDataGridViewTextBoxColumn.Visible = False
+        Me.KeyDataGridViewTextBoxColumn.Width = 30
+        '
+        'ChemNameDataGridViewTextBoxColumn
+        '
+        Me.ChemNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ChemNameDataGridViewTextBoxColumn.DataPropertyName = "chemName"
+        Me.ChemNameDataGridViewTextBoxColumn.HeaderText = "Product Name"
+        Me.ChemNameDataGridViewTextBoxColumn.Name = "ChemNameDataGridViewTextBoxColumn"
+        Me.ChemNameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ChemManDataGridViewTextBoxColumn
+        '
+        Me.ChemManDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ChemManDataGridViewTextBoxColumn.DataPropertyName = "chemMan"
+        Me.ChemManDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
+        Me.ChemManDataGridViewTextBoxColumn.Name = "ChemManDataGridViewTextBoxColumn"
+        Me.ChemManDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ChemPathDataGridViewTextBoxColumn
+        '
+        Me.ChemPathDataGridViewTextBoxColumn.DataPropertyName = "chemPath"
+        Me.ChemPathDataGridViewTextBoxColumn.HeaderText = "chemPath"
+        Me.ChemPathDataGridViewTextBoxColumn.Name = "ChemPathDataGridViewTextBoxColumn"
+        Me.ChemPathDataGridViewTextBoxColumn.ReadOnly = True
+        Me.ChemPathDataGridViewTextBoxColumn.Visible = False
+        Me.ChemPathDataGridViewTextBoxColumn.Width = 80
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -238,15 +238,15 @@ Partial Class Main
     Friend WithEvents MsdsDBDataSet As MSDS.msdsDBDataSet
     Friend WithEvents ChemTblBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents ChemTblTableAdapter As MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter
-    Friend WithEvents KeyDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents searchBox As System.Windows.Forms.TextBox
     Friend WithEvents ManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pdfViewer As AxAcroPDFLib.AxAcroPDF
     Friend WithEvents pdfErrorLabel As System.Windows.Forms.Label
     Friend WithEvents EventLog1 As System.Diagnostics.EventLog
+    Friend WithEvents KeyDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChemNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

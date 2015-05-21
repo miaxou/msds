@@ -54,11 +54,11 @@ Partial Class Manager
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.browseBtn = New System.Windows.Forms.Button()
         Me.msdsEditGrid = New System.Windows.Forms.DataGridView()
+        Me.searchEditBox = New System.Windows.Forms.TextBox()
         Me.KeyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.searchEditBox = New System.Windows.Forms.TextBox()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -81,11 +81,11 @@ Partial Class Manager
         'ChemNameLabel
         '
         ChemNameLabel.AutoSize = True
-        ChemNameLabel.Location = New System.Drawing.Point(460, 87)
+        ChemNameLabel.Location = New System.Drawing.Point(420, 87)
         ChemNameLabel.Name = "ChemNameLabel"
-        ChemNameLabel.Size = New System.Drawing.Size(38, 13)
+        ChemNameLabel.Size = New System.Drawing.Size(78, 13)
         ChemNameLabel.TabIndex = 5
-        ChemNameLabel.Text = "Name:"
+        ChemNameLabel.Text = "Product Name:"
         '
         'ChemPathLabel
         '
@@ -322,6 +322,13 @@ Partial Class Manager
         Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
         Me.msdsEditGrid.TabIndex = 10
         '
+        'searchEditBox
+        '
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
+        Me.searchEditBox.Name = "searchEditBox"
+        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
+        Me.searchEditBox.TabIndex = 11
+        '
         'KeyDataGridViewTextBoxColumn1
         '
         Me.KeyDataGridViewTextBoxColumn1.DataPropertyName = "key"
@@ -334,7 +341,7 @@ Partial Class Manager
         '
         Me.ChemNameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.ChemNameDataGridViewTextBoxColumn1.DataPropertyName = "chemName"
-        Me.ChemNameDataGridViewTextBoxColumn1.HeaderText = "Name"
+        Me.ChemNameDataGridViewTextBoxColumn1.HeaderText = "Product Name"
         Me.ChemNameDataGridViewTextBoxColumn1.Name = "ChemNameDataGridViewTextBoxColumn1"
         Me.ChemNameDataGridViewTextBoxColumn1.ReadOnly = True
         '
@@ -353,13 +360,6 @@ Partial Class Manager
         Me.ChemPathDataGridViewTextBoxColumn1.Name = "ChemPathDataGridViewTextBoxColumn1"
         Me.ChemPathDataGridViewTextBoxColumn1.ReadOnly = True
         Me.ChemPathDataGridViewTextBoxColumn1.Visible = False
-        '
-        'searchEditBox
-        '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
-        Me.searchEditBox.Name = "searchEditBox"
-        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
-        Me.searchEditBox.TabIndex = 11
         '
         'Manager
         '
@@ -417,9 +417,9 @@ Partial Class Manager
     Friend WithEvents ChemNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents searchEditBox As System.Windows.Forms.TextBox
     Friend WithEvents KeyDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemNameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemManDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents searchEditBox As System.Windows.Forms.TextBox
 End Class
