@@ -88,6 +88,21 @@
         End If
     End Sub
 
+    Private Sub searchEditBox_KeyDown(sender As Object, e As KeyEventArgs) Handles searchEditBox.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Down
+                If msdsEditGrid.CurrentRow.Index < msdsEditGrid.Rows.Count - 1 Then
+                    msdsEditGrid.CurrentCell = msdsEditGrid(msdsEditGrid.CurrentCell.ColumnIndex, msdsEditGrid.CurrentCell.RowIndex + 1)
+                End If
+                e.Handled = True
+            Case Keys.Up
+                If msdsEditGrid.CurrentRow.Index > 0 Then
+                    msdsEditGrid.CurrentCell = msdsEditGrid(msdsEditGrid.CurrentCell.ColumnIndex, msdsEditGrid.CurrentCell.RowIndex - 1)
+                End If
+                e.Handled = True
+        End Select
+    End Sub
+
     Private Sub searchEditBox_LostFocus(sender As Object, e As EventArgs) Handles searchEditBox.LostFocus
         If searchEditBox.Text = "" Then
             searchEditBox.Text = "Search..."
@@ -102,6 +117,5 @@
 
         'Filter datagrid
         ChemTblBindingSource.Filter = "chemName like '%" & searchEditBox.Text & "%' OR chemMan like '%" & searchEditBox.Text & "%'"
-
     End Sub
 End Class

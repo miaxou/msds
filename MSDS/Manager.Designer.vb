@@ -54,11 +54,11 @@ Partial Class Manager
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.browseBtn = New System.Windows.Forms.Button()
         Me.msdsEditGrid = New System.Windows.Forms.DataGridView()
-        Me.searchEditBox = New System.Windows.Forms.TextBox()
         Me.KeyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.searchEditBox = New System.Windows.Forms.TextBox()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -148,7 +148,7 @@ Partial Class Manager
         Me.saveBtn.Location = New System.Drawing.Point(809, 498)
         Me.saveBtn.Name = "saveBtn"
         Me.saveBtn.Size = New System.Drawing.Size(75, 23)
-        Me.saveBtn.TabIndex = 5
+        Me.saveBtn.TabIndex = 6
         Me.saveBtn.Text = "Save"
         Me.saveBtn.UseVisualStyleBackColor = True
         '
@@ -157,7 +157,7 @@ Partial Class Manager
         Me.cancelBtn.Location = New System.Drawing.Point(728, 498)
         Me.cancelBtn.Name = "cancelBtn"
         Me.cancelBtn.Size = New System.Drawing.Size(75, 23)
-        Me.cancelBtn.TabIndex = 4
+        Me.cancelBtn.TabIndex = 5
         Me.cancelBtn.Text = "Cancel"
         Me.cancelBtn.UseVisualStyleBackColor = True
         '
@@ -175,7 +175,7 @@ Partial Class Manager
         Me.ChemManTextBox.Location = New System.Drawing.Point(504, 110)
         Me.ChemManTextBox.Name = "ChemManTextBox"
         Me.ChemManTextBox.Size = New System.Drawing.Size(299, 20)
-        Me.ChemManTextBox.TabIndex = 1
+        Me.ChemManTextBox.TabIndex = 2
         '
         'ChemNameTextBox
         '
@@ -183,7 +183,7 @@ Partial Class Manager
         Me.ChemNameTextBox.Location = New System.Drawing.Point(504, 84)
         Me.ChemNameTextBox.Name = "ChemNameTextBox"
         Me.ChemNameTextBox.Size = New System.Drawing.Size(299, 20)
-        Me.ChemNameTextBox.TabIndex = 0
+        Me.ChemNameTextBox.TabIndex = 1
         '
         'ChemPathTextBox
         '
@@ -191,7 +191,7 @@ Partial Class Manager
         Me.ChemPathTextBox.Location = New System.Drawing.Point(504, 165)
         Me.ChemPathTextBox.Name = "ChemPathTextBox"
         Me.ChemPathTextBox.Size = New System.Drawing.Size(299, 20)
-        Me.ChemPathTextBox.TabIndex = 2
+        Me.ChemPathTextBox.TabIndex = 3
         '
         'BindingNavigator1
         '
@@ -301,7 +301,7 @@ Partial Class Manager
         Me.browseBtn.Location = New System.Drawing.Point(809, 163)
         Me.browseBtn.Name = "browseBtn"
         Me.browseBtn.Size = New System.Drawing.Size(75, 23)
-        Me.browseBtn.TabIndex = 3
+        Me.browseBtn.TabIndex = 4
         Me.browseBtn.Text = "Browse"
         Me.browseBtn.UseVisualStyleBackColor = True
         '
@@ -321,13 +321,6 @@ Partial Class Manager
         Me.msdsEditGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
         Me.msdsEditGrid.TabIndex = 10
-        '
-        'searchEditBox
-        '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
-        Me.searchEditBox.Name = "searchEditBox"
-        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
-        Me.searchEditBox.TabIndex = 11
         '
         'KeyDataGridViewTextBoxColumn1
         '
@@ -360,6 +353,13 @@ Partial Class Manager
         Me.ChemPathDataGridViewTextBoxColumn1.Name = "ChemPathDataGridViewTextBoxColumn1"
         Me.ChemPathDataGridViewTextBoxColumn1.ReadOnly = True
         Me.ChemPathDataGridViewTextBoxColumn1.Visible = False
+        '
+        'searchEditBox
+        '
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
+        Me.searchEditBox.Name = "searchEditBox"
+        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
+        Me.searchEditBox.TabIndex = 0
         '
         'Manager
         '

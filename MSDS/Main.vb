@@ -68,7 +68,9 @@ Public Class Main
                 End If
                 e.Handled = True
             Case Keys.Enter
-                displayPDF()
+                If msdsGrid.SelectedRows.Count <> 0 Then
+                    displayPDF()
+                End If
                 e.Handled = True
         End Select
     End Sub
