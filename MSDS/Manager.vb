@@ -26,21 +26,26 @@
 
     'Run through all rows/cells and check for empty values.  If found set an error flag and change error state.
     Private Sub errorCheck()
-        For Each row As DataGridViewRow In msdsEditGrid.Rows
-            For Each cell As DataGridViewCell In row.Cells
-                If cell.Value.ToString().Length = 0 Then
-                    cell.ErrorText = "Please Enter A Value"
-                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
-                Else
-                    cell.ErrorText = ""
-                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
-                End If
+        If msdsEditGrid.SelectedRows.Count > 0 Then
+            For Each row As DataGridViewRow In msdsEditGrid.Rows
+                For Each cell As DataGridViewCell In row.Cells
+                    If cell.Value.ToString().Length = 0 Then
+                        cell.ErrorText = "Please Enter A Value"
+                        msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
+                    Else
+                        cell.ErrorText = ""
+                        msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
+                    End If
 
-                If cell.ErrorText.Length > 0 Then
-                    errorState = True
-                End If
+                    If cell.ErrorText.Length > 0 Then
+                        errorState = True
+                    End If
+                Next
             Next
-        Next
+        Else
+            errorState = True
+        End If
+
     End Sub
 
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
