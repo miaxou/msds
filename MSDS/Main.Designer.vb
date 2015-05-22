@@ -27,27 +27,27 @@ Partial Class Main
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.searchBox = New System.Windows.Forms.TextBox()
         Me.msdsGrid = New System.Windows.Forms.DataGridView()
-        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pdfViewer = New AxAcroPDFLib.AxAcroPDF()
-        Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
         Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
+        Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -93,16 +93,6 @@ Partial Class Main
         Me.msdsGrid.Size = New System.Drawing.Size(297, 461)
         Me.msdsGrid.TabIndex = 1
         '
-        'ChemTblBindingSource
-        '
-        Me.ChemTblBindingSource.DataMember = "chemTbl"
-        Me.ChemTblBindingSource.DataSource = Me.MsdsDBDataSet
-        '
-        'MsdsDBDataSet
-        '
-        Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
-        Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
@@ -143,10 +133,6 @@ Partial Class Main
         Me.pdfViewer.Size = New System.Drawing.Size(504, 502)
         Me.pdfViewer.TabIndex = 2
         Me.pdfViewer.TabStop = False
-        '
-        'ChemTblTableAdapter
-        '
-        Me.ChemTblTableAdapter.ClearBeforeFill = True
         '
         'pdfErrorLabel
         '
@@ -205,6 +191,20 @@ Partial Class Main
         Me.ChemPathDataGridViewTextBoxColumn.Visible = False
         Me.ChemPathDataGridViewTextBoxColumn.Width = 80
         '
+        'ChemTblBindingSource
+        '
+        Me.ChemTblBindingSource.DataMember = "chemTbl"
+        Me.ChemTblBindingSource.DataSource = Me.MsdsDBDataSet
+        '
+        'MsdsDBDataSet
+        '
+        Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
+        Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'ChemTblTableAdapter
+        '
+        Me.ChemTblTableAdapter.ClearBeforeFill = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -221,12 +221,12 @@ Partial Class Main
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

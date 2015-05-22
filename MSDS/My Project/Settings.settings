@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">data source="db\msdsDB.sqlite"</Value>
     </Setting>
+    <Setting Name="startingPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">S:\Public\MSDS</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

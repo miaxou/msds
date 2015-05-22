@@ -63,6 +63,15 @@ Namespace My
                 Return CType(Me("msdsDBConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("S:\Public\MSDS")>  _
+        Public ReadOnly Property startingPath() As String
+            Get
+                Return CType(Me("startingPath"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

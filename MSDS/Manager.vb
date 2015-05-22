@@ -85,7 +85,7 @@
 
         fd.Title = "Open File Dialog"
         If ChemPathTextBox.Text = "" Then
-            fd.InitialDirectory = "S:\Public\MSDS"
+            fd.InitialDirectory = My.Settings.startingPath
         Else
             fd.InitialDirectory = ChemPathTextBox.Text.Substring(0, ChemPathTextBox.Text.LastIndexOf("\"))
         End If
