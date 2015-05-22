@@ -34,6 +34,10 @@ Public Class Main
                 pdfErrorLabel.Visible = False
                 Me.pdfViewer.LoadFile(msdsGrid.CurrentRow.Cells(3).Value)
             End If
+        ElseIf msdsGrid.CurrentRow.Cells(3).Value = "" Then
+            pdfViewer.Visible = False
+            pdfErrorLabel.Text = "No path to PDF available."
+            pdfErrorLabel.Visible = True
         Else
             pdfViewer.Visible = False
             pdfErrorLabel.Text = msdsGrid.CurrentRow.Cells(3).Value & " could not be found.  Please check the path and try again."
@@ -101,7 +105,12 @@ Public Class Main
     End Sub
 
     Private Sub ManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManagerToolStripMenuItem.Click
-        Login.Show()
+        If Application.OpenForms().OfType(Of Manager).Any Then
+            MsgBox("Manager window already open!")
+        Else
+            Login.Show()
+        End If
+
     End Sub
 
     Private Sub msdsGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsGrid.KeyDown

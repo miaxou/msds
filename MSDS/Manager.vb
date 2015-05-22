@@ -1,9 +1,12 @@
 ﻿Public Class Manager
+    Dim errorState = False
 
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
         'present.
         Try
+            'Remove the DB constraints and handle them on save to avoid null exceptions.
+            Me.MsdsDBDataSet.EnforceConstraints = False
             Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -19,39 +22,49 @@
         'Handle searchbox
         searchEditBox.Text = "Search..."
         searchEditBox.ForeColor = Color.Gray
+    End Sub
 
+    'Run through all rows/cells and check for empty values.  If found set an error flag and change error state.
+    Private Sub errorCheck()
+        For Each row As DataGridViewRow In msdsEditGrid.Rows
+            For Each cell As DataGridViewCell In row.Cells
+                If cell.Value.ToString().Length = 0 Then
+                    cell.ErrorText = "Please Enter A Value"
+                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
+                Else
+                    cell.ErrorText = ""
+                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
+                End If
+
+                If cell.ErrorText.Length > 0 Then
+                    errorState = True
+                End If
+            Next
+        Next
     End Sub
 
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
-        'I'm like 99% positive there's a more elegant way to handle these errors but this works for now.  Basically create an empty string
-        ' and add error messages to it as necessary.
-        Dim errorMsg As String = ""
+        'Disable multiple save clicks
+        saveBtn.Enabled = False
+        'Hack-y way to force the datagrid to update.  We're clearing the filter and forcing moves which ensures
+        'that the datagrid will be updated when error checking is performed.  Probably (hopefully) a better way to handle this.
+        Dim tmpText As String = searchEditBox.Text
+        searchEditBox.Text = ""
+        dataNavigator.MovePreviousItem.PerformClick()
+        dataNavigator.MoveNextItem.PerformClick()
+        errorCheck()
 
-        If ChemManTextBox.Text = "" Then
-            errorMsg = errorMsg & "MSDS Manufacturer Cannot Be Blank." & Environment.NewLine
-        End If
-
-        If ChemNameTextBox.Text = "" Then
-            errorMsg = errorMsg & "MSDS Name Cannot Be Blank." & Environment.NewLine
-        End If
-
-        If ChemPathTextBox.Text = "" Then
-            errorMsg = errorMsg & "MSDS Path Cannot Be Blank." & Environment.NewLine
-        End If
-
-        'If the string is still empty assume no errors.  If text was entered into the boxes the datagrid won't populate until you move
-        'off the record.  My crappy hack for that was to move records twice (once in both directions) to force the populate before
-        'handling the update.  Both directions is required because if you're at the top or bottom then one or the other doesn't actually
-        'work.  There really must be a better way to handle this too.  Then call the refresh on the main page to update that grid
-        'immediately and close this form.
-        If errorMsg = "" Then
-            BindingNavigator1.MoveNextItem.PerformClick()
-            BindingNavigator1.MovePreviousItem.PerformClick()
+        'If error state is false update the dataset, refresh the data on the main form, and close the manager
+        If errorState = False Then
             ChemTblTableAdapter.Update(MsdsDBDataSet)
             Main.refreshData()
             Me.Close()
+            'If an error is found reset everything and prompt for correction.
         Else
-            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            searchEditBox.Text = tmpText
+            MessageBox.Show("Please correct validation errors before saving!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            errorState = False
+            saveBtn.Enabled = True
         End If
     End Sub
 

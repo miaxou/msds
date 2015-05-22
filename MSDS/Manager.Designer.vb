@@ -40,7 +40,7 @@ Partial Class Manager
         Me.ChemManTextBox = New System.Windows.Forms.TextBox()
         Me.ChemNameTextBox = New System.Windows.Forms.TextBox()
         Me.ChemPathTextBox = New System.Windows.Forms.TextBox()
-        Me.BindingNavigator1 = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.dataNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
@@ -54,18 +54,18 @@ Partial Class Manager
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.browseBtn = New System.Windows.Forms.Button()
         Me.msdsEditGrid = New System.Windows.Forms.DataGridView()
+        Me.searchEditBox = New System.Windows.Forms.TextBox()
         Me.KeyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.searchEditBox = New System.Windows.Forms.TextBox()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.BindingNavigator1.SuspendLayout()
+        CType(Me.dataNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dataNavigator.SuspendLayout()
         CType(Me.msdsEditGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -193,23 +193,23 @@ Partial Class Manager
         Me.ChemPathTextBox.Size = New System.Drawing.Size(299, 20)
         Me.ChemPathTextBox.TabIndex = 3
         '
-        'BindingNavigator1
+        'dataNavigator
         '
-        Me.BindingNavigator1.AddNewItem = Me.BindingNavigatorAddNewItem
-        Me.BindingNavigator1.BindingSource = Me.ChemTblBindingSource
-        Me.BindingNavigator1.CountItem = Me.BindingNavigatorCountItem
-        Me.BindingNavigator1.DeleteItem = Me.BindingNavigatorDeleteItem
-        Me.BindingNavigator1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
-        Me.BindingNavigator1.Location = New System.Drawing.Point(0, 0)
-        Me.BindingNavigator1.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
-        Me.BindingNavigator1.MoveLastItem = Me.BindingNavigatorMoveLastItem
-        Me.BindingNavigator1.MoveNextItem = Me.BindingNavigatorMoveNextItem
-        Me.BindingNavigator1.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
-        Me.BindingNavigator1.Name = "BindingNavigator1"
-        Me.BindingNavigator1.PositionItem = Me.BindingNavigatorPositionItem
-        Me.BindingNavigator1.Size = New System.Drawing.Size(904, 25)
-        Me.BindingNavigator1.TabIndex = 9
-        Me.BindingNavigator1.Text = "BindingNavigator1"
+        Me.dataNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
+        Me.dataNavigator.BindingSource = Me.ChemTblBindingSource
+        Me.dataNavigator.CountItem = Me.BindingNavigatorCountItem
+        Me.dataNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.dataNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
+        Me.dataNavigator.Location = New System.Drawing.Point(0, 0)
+        Me.dataNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+        Me.dataNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
+        Me.dataNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
+        Me.dataNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+        Me.dataNavigator.Name = "dataNavigator"
+        Me.dataNavigator.PositionItem = Me.BindingNavigatorPositionItem
+        Me.dataNavigator.Size = New System.Drawing.Size(904, 25)
+        Me.dataNavigator.TabIndex = 9
+        Me.dataNavigator.Text = "BindingNavigator1"
         '
         'BindingNavigatorAddNewItem
         '
@@ -322,6 +322,13 @@ Partial Class Manager
         Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
         Me.msdsEditGrid.TabIndex = 10
         '
+        'searchEditBox
+        '
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
+        Me.searchEditBox.Name = "searchEditBox"
+        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
+        Me.searchEditBox.TabIndex = 0
+        '
         'KeyDataGridViewTextBoxColumn1
         '
         Me.KeyDataGridViewTextBoxColumn1.DataPropertyName = "key"
@@ -349,27 +356,20 @@ Partial Class Manager
         'ChemPathDataGridViewTextBoxColumn1
         '
         Me.ChemPathDataGridViewTextBoxColumn1.DataPropertyName = "chemPath"
-        Me.ChemPathDataGridViewTextBoxColumn1.HeaderText = "chemPath"
+        Me.ChemPathDataGridViewTextBoxColumn1.HeaderText = "Path"
         Me.ChemPathDataGridViewTextBoxColumn1.Name = "ChemPathDataGridViewTextBoxColumn1"
         Me.ChemPathDataGridViewTextBoxColumn1.ReadOnly = True
-        Me.ChemPathDataGridViewTextBoxColumn1.Visible = False
-        '
-        'searchEditBox
-        '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
-        Me.searchEditBox.Name = "searchEditBox"
-        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
-        Me.searchEditBox.TabIndex = 0
         '
         'Manager
         '
+        Me.AcceptButton = Me.saveBtn
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(904, 541)
         Me.Controls.Add(Me.searchEditBox)
         Me.Controls.Add(Me.msdsEditGrid)
         Me.Controls.Add(Me.browseBtn)
-        Me.Controls.Add(Me.BindingNavigator1)
+        Me.Controls.Add(Me.dataNavigator)
         Me.Controls.Add(ChemPathLabel)
         Me.Controls.Add(Me.ChemPathTextBox)
         Me.Controls.Add(ChemNameLabel)
@@ -382,9 +382,9 @@ Partial Class Manager
         Me.Text = "Manager"
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.BindingNavigator1.ResumeLayout(False)
-        Me.BindingNavigator1.PerformLayout()
+        CType(Me.dataNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.dataNavigator.ResumeLayout(False)
+        Me.dataNavigator.PerformLayout()
         CType(Me.msdsEditGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -400,7 +400,7 @@ Partial Class Manager
     Friend WithEvents ChemManTextBox As System.Windows.Forms.TextBox
     Friend WithEvents ChemNameTextBox As System.Windows.Forms.TextBox
     Friend WithEvents ChemPathTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents BindingNavigator1 As System.Windows.Forms.BindingNavigator
+    Friend WithEvents dataNavigator As System.Windows.Forms.BindingNavigator
     Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
     Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
     Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
