@@ -27,6 +27,12 @@ Partial Class Main
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.searchBox = New System.Windows.Forms.TextBox()
         Me.msdsGrid = New System.Windows.Forms.DataGridView()
+        Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,20 +40,14 @@ Partial Class Main
         Me.pdfViewer = New AxAcroPDFLib.AxAcroPDF()
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
-        Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
         Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -93,70 +93,6 @@ Partial Class Main
         Me.msdsGrid.Size = New System.Drawing.Size(297, 461)
         Me.msdsGrid.TabIndex = 1
         '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(843, 24)
-        Me.MenuStrip1.TabIndex = 1
-        Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'FileToolStripMenuItem
-        '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManagerToolStripMenuItem, Me.ExitToolStripMenuItem})
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileToolStripMenuItem.Text = "File"
-        '
-        'ManagerToolStripMenuItem
-        '
-        Me.ManagerToolStripMenuItem.Name = "ManagerToolStripMenuItem"
-        Me.ManagerToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.ManagerToolStripMenuItem.Text = "Manager"
-        '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'pdfViewer
-        '
-        Me.pdfViewer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pdfViewer.Enabled = True
-        Me.pdfViewer.Location = New System.Drawing.Point(327, 37)
-        Me.pdfViewer.Name = "pdfViewer"
-        Me.pdfViewer.OcxState = CType(resources.GetObject("pdfViewer.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.pdfViewer.Size = New System.Drawing.Size(504, 502)
-        Me.pdfViewer.TabIndex = 2
-        Me.pdfViewer.TabStop = False
-        '
-        'pdfErrorLabel
-        '
-        Me.pdfErrorLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pdfErrorLabel.AutoSize = True
-        Me.pdfErrorLabel.BackColor = System.Drawing.SystemColors.Control
-        Me.pdfErrorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pdfErrorLabel.ForeColor = System.Drawing.Color.Red
-        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 277)
-        Me.pdfErrorLabel.MaximumSize = New System.Drawing.Size(504, 0)
-        Me.pdfErrorLabel.MinimumSize = New System.Drawing.Size(504, 0)
-        Me.pdfErrorLabel.Name = "pdfErrorLabel"
-        Me.pdfErrorLabel.Size = New System.Drawing.Size(504, 20)
-        Me.pdfErrorLabel.TabIndex = 3
-        Me.pdfErrorLabel.Text = "Error"
-        Me.pdfErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.pdfErrorLabel.Visible = False
-        '
-        'EventLog1
-        '
-        Me.EventLog1.SynchronizingObject = Me
-        '
         'KeyDataGridViewTextBoxColumn
         '
         Me.KeyDataGridViewTextBoxColumn.DataPropertyName = "key"
@@ -201,6 +137,70 @@ Partial Class Main
         Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
         Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(843, 24)
+        Me.MenuStrip1.TabIndex = 1
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManagerToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'ManagerToolStripMenuItem
+        '
+        Me.ManagerToolStripMenuItem.Name = "ManagerToolStripMenuItem"
+        Me.ManagerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ManagerToolStripMenuItem.Text = "Manager"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'pdfViewer
+        '
+        Me.pdfViewer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pdfViewer.Enabled = True
+        Me.pdfViewer.Location = New System.Drawing.Point(327, 37)
+        Me.pdfViewer.Name = "pdfViewer"
+        Me.pdfViewer.OcxState = CType(resources.GetObject("pdfViewer.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.pdfViewer.Size = New System.Drawing.Size(504, 502)
+        Me.pdfViewer.TabIndex = 2
+        Me.pdfViewer.TabStop = False
+        '
+        'pdfErrorLabel
+        '
+        Me.pdfErrorLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pdfErrorLabel.AutoSize = True
+        Me.pdfErrorLabel.BackColor = System.Drawing.SystemColors.Control
+        Me.pdfErrorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pdfErrorLabel.ForeColor = System.Drawing.Color.Red
+        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 277)
+        Me.pdfErrorLabel.MaximumSize = New System.Drawing.Size(504, 0)
+        Me.pdfErrorLabel.MinimumSize = New System.Drawing.Size(504, 0)
+        Me.pdfErrorLabel.Name = "pdfErrorLabel"
+        Me.pdfErrorLabel.Size = New System.Drawing.Size(504, 20)
+        Me.pdfErrorLabel.TabIndex = 3
+        Me.pdfErrorLabel.Text = "Error"
+        Me.pdfErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.pdfErrorLabel.Visible = False
+        '
+        'EventLog1
+        '
+        Me.EventLog1.SynchronizingObject = Me
+        '
         'ChemTblTableAdapter
         '
         Me.ChemTblTableAdapter.ClearBeforeFill = True
@@ -221,12 +221,12 @@ Partial Class Main
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

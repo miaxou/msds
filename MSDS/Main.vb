@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 
 Public Class Main
-
     Public Declare Auto Function FindExecutable Lib "shell32.dll" (ByVal lpFile As String, ByVal lpDirectory As String, ByVal lpResult As String) As Int32
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load

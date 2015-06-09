@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("data source=""db\msdsDB.sqlite""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("data source=""|DataDirectory|\db\msdsDB.sqlite""")>  _
         Public ReadOnly Property msdsDBConnectionString() As String
             Get
                 Return CType(Me("msdsDBConnectionString"),String)
