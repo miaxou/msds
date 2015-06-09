@@ -53,8 +53,6 @@
         saveBtn.Enabled = False
         'Hack-y way to force the datagrid to update.  We're clearing the filter and forcing moves which ensures
         'that the datagrid will be updated when error checking is performed.  Probably (hopefully) a better way to handle this.
-        Dim tmpText As String = searchEditBox.Text
-        searchEditBox.Text = ""
         dataNavigator.MovePreviousItem.PerformClick()
         dataNavigator.MoveNextItem.PerformClick()
         errorCheck()
@@ -66,7 +64,6 @@
             Me.Close()
             'If an error is found reset everything and prompt for correction.
         Else
-            searchEditBox.Text = tmpText
             MessageBox.Show("Please correct validation errors before saving!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             errorState = False
             saveBtn.Enabled = True
