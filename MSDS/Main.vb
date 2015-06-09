@@ -50,7 +50,7 @@ Public Class Main
         ChemTblBindingSource.Sort = "chemMan"
     End Sub
 
-    Private Sub searchBox_Enter(sender As Object, e As EventArgs) Handles searchBox.Enter
+    Private Sub searchBox_GotFocus(sender As Object, e As EventArgs) Handles searchBox.GotFocus
         If searchBox.Text = "Search..." Then
             searchBox.Text = ""
             searchBox.ForeColor = Color.Black

@@ -96,7 +96,7 @@
         End If
     End Sub
 
-    Private Sub searchEditBox_Enter(sender As Object, e As EventArgs) Handles searchEditBox.Enter
+    Private Sub searchEditBox_GotFocus(sender As Object, e As EventArgs) Handles searchEditBox.GotFocus
         If searchEditBox.Text = "Search..." Then
             searchEditBox.Text = ""
             searchEditBox.ForeColor = Color.Black
