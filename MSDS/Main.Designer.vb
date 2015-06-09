@@ -58,7 +58,7 @@ Partial Class Main
         Me.GroupBox1.Controls.Add(Me.msdsGrid)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 27)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(309, 512)
+        Me.GroupBox1.Size = New System.Drawing.Size(309, 513)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
@@ -90,7 +90,7 @@ Partial Class Main
         Me.msdsGrid.ReadOnly = True
         Me.msdsGrid.RowHeadersVisible = False
         Me.msdsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.msdsGrid.Size = New System.Drawing.Size(297, 461)
+        Me.msdsGrid.Size = New System.Drawing.Size(297, 462)
         Me.msdsGrid.TabIndex = 1
         '
         'KeyDataGridViewTextBoxColumn
@@ -142,7 +142,7 @@ Partial Class Main
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(843, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(774, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -156,13 +156,13 @@ Partial Class Main
         'ManagerToolStripMenuItem
         '
         Me.ManagerToolStripMenuItem.Name = "ManagerToolStripMenuItem"
-        Me.ManagerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ManagerToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.ManagerToolStripMenuItem.Text = "Manager"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'pdfViewer
@@ -174,7 +174,7 @@ Partial Class Main
         Me.pdfViewer.Location = New System.Drawing.Point(327, 37)
         Me.pdfViewer.Name = "pdfViewer"
         Me.pdfViewer.OcxState = CType(resources.GetObject("pdfViewer.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.pdfViewer.Size = New System.Drawing.Size(504, 502)
+        Me.pdfViewer.Size = New System.Drawing.Size(435, 503)
         Me.pdfViewer.TabIndex = 2
         Me.pdfViewer.TabStop = False
         '
@@ -187,11 +187,11 @@ Partial Class Main
         Me.pdfErrorLabel.BackColor = System.Drawing.SystemColors.Control
         Me.pdfErrorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pdfErrorLabel.ForeColor = System.Drawing.Color.Red
-        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 277)
-        Me.pdfErrorLabel.MaximumSize = New System.Drawing.Size(504, 0)
-        Me.pdfErrorLabel.MinimumSize = New System.Drawing.Size(504, 0)
+        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 273)
+        Me.pdfErrorLabel.MaximumSize = New System.Drawing.Size(435, 0)
+        Me.pdfErrorLabel.MinimumSize = New System.Drawing.Size(435, 0)
         Me.pdfErrorLabel.Name = "pdfErrorLabel"
-        Me.pdfErrorLabel.Size = New System.Drawing.Size(504, 20)
+        Me.pdfErrorLabel.Size = New System.Drawing.Size(435, 20)
         Me.pdfErrorLabel.TabIndex = 3
         Me.pdfErrorLabel.Text = "Error"
         Me.pdfErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -209,7 +209,7 @@ Partial Class Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(843, 551)
+        Me.ClientSize = New System.Drawing.Size(774, 552)
         Me.Controls.Add(Me.pdfErrorLabel)
         Me.Controls.Add(Me.pdfViewer)
         Me.Controls.Add(Me.GroupBox1)

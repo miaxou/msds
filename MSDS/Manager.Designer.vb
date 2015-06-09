@@ -54,11 +54,11 @@ Partial Class Manager
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.browseBtn = New System.Windows.Forms.Button()
         Me.msdsEditGrid = New System.Windows.Forms.DataGridView()
-        Me.searchEditBox = New System.Windows.Forms.TextBox()
         Me.KeyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.searchEditBox = New System.Windows.Forms.TextBox()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -322,13 +322,6 @@ Partial Class Manager
         Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
         Me.msdsEditGrid.TabIndex = 10
         '
-        'searchEditBox
-        '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
-        Me.searchEditBox.Name = "searchEditBox"
-        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
-        Me.searchEditBox.TabIndex = 0
-        '
         'KeyDataGridViewTextBoxColumn1
         '
         Me.KeyDataGridViewTextBoxColumn1.DataPropertyName = "key"
@@ -360,6 +353,13 @@ Partial Class Manager
         Me.ChemPathDataGridViewTextBoxColumn1.Name = "ChemPathDataGridViewTextBoxColumn1"
         Me.ChemPathDataGridViewTextBoxColumn1.ReadOnly = True
         '
+        'searchEditBox
+        '
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
+        Me.searchEditBox.Name = "searchEditBox"
+        Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
+        Me.searchEditBox.TabIndex = 0
+        '
         'Manager
         '
         Me.AcceptButton = Me.saveBtn
@@ -378,8 +378,10 @@ Partial Class Manager
         Me.Controls.Add(Me.ChemManTextBox)
         Me.Controls.Add(Me.cancelBtn)
         Me.Controls.Add(Me.saveBtn)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Manager"
-        Me.Text = "Manager"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "MSDS Manager"
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dataNavigator, System.ComponentModel.ISupportInitialize).EndInit()
