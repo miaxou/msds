@@ -2,22 +2,7 @@
     Dim errorState = False
 
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
-        'present.
-        Try
-            'Remove the DB constraints and handle them on save to avoid null exceptions.
-            Me.MsdsDBDataSet.EnforceConstraints = False
-            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-        Catch ex As SQLite.SQLiteException
-            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Application.Exit()
-        End Try
-
-        'This is populating the autocomplete for the manufacturer row.  This should hopefully help maintain consistency of case and
-        'spelling across manufacturers.
-        For Each dr As DataRow In MsdsDBDataSet.chemTbl.Rows
-            ChemManTextBox.AutoCompleteCustomSource.Add(dr("chemMan").ToString())
-        Next
+        dgvBackgroundLoad.RunWorkerAsync()
 
         'Handle searchbox
         searchEditBox.Text = "Search..."
@@ -132,5 +117,28 @@
 
         'Filter datagrid
         ChemTblBindingSource.Filter = "chemName like '%" & searchEditBox.Text & "%' OR chemMan like '%" & searchEditBox.Text & "%'"
+    End Sub
+
+    Private Sub dgvBackgroundLoad_DoWork1(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles dgvBackgroundLoad.DoWork
+        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
+        'present.
+        Try
+            'Remove the DB constraints and handle them on save to avoid null exceptions.
+            Me.MsdsDBDataSet.EnforceConstraints = False
+            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        Catch ex As SQLite.SQLiteException
+            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit()
+        End Try
+
+        'This is populating the autocomplete for the manufacturer row.  This should hopefully help maintain consistency of case and
+        'spelling across manufacturers.
+        For Each dr As DataRow In MsdsDBDataSet.chemTbl.Rows
+            ChemManTextBox.AutoCompleteCustomSource.Add(dr("chemMan").ToString())
+        Next
+    End Sub
+
+    Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
+        ChemTblBindingSource.ResetBindings(False)
     End Sub
 End Class

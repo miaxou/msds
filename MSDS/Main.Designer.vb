@@ -41,6 +41,7 @@ Partial Class Main
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
         Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
+        Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,6 +140,7 @@ Partial Class Main
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -205,6 +207,9 @@ Partial Class Main
         '
         Me.ChemTblTableAdapter.ClearBeforeFill = True
         '
+        'dgvBackgroundLoad
+        '
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -248,5 +253,6 @@ Partial Class Main
     Friend WithEvents ChemNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dgvBackgroundLoad As System.ComponentModel.BackgroundWorker
 
 End Class

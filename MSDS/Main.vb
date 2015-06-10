@@ -4,15 +4,7 @@ Public Class Main
     Public Declare Auto Function FindExecutable Lib "shell32.dll" (ByVal lpFile As String, ByVal lpDirectory As String, ByVal lpResult As String) As Int32
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
-        'present.
-        Try
-            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-            ChemTblBindingSource.Sort = "chemMan"
-        Catch ex As SQLite.SQLiteException
-            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Application.Exit()
-        End Try
+        dgvBackgroundLoad.RunWorkerAsync()
 
         'Set the viewer box default visibility and handle the searchbox
         pdfViewer.Visible = False
@@ -117,5 +109,21 @@ Public Class Main
             displayPDF()
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+    Private Sub dgvBackgroundLoad_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles dgvBackgroundLoad.DoWork
+        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
+        'present.
+        Try
+            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            ChemTblBindingSource.Sort = "chemMan"
+        Catch ex As SQLite.SQLiteException
+            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit()
+        End Try
+    End Sub
+
+    Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
+        ChemTblBindingSource.ResetBindings(False)
     End Sub
 End Class

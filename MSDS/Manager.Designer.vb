@@ -59,6 +59,7 @@ Partial Class Manager
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.searchEditBox = New System.Windows.Forms.TextBox()
+        Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -424,4 +425,5 @@ Partial Class Manager
     Friend WithEvents ChemNameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemManDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dgvBackgroundLoad As System.ComponentModel.BackgroundWorker
 End Class
