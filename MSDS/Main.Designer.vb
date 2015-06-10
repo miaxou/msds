@@ -42,6 +42,7 @@ Partial Class Main
         Me.EventLog1 = New System.Diagnostics.EventLog()
         Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
+        Me.loadingStatus = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -210,11 +211,21 @@ Partial Class Main
         'dgvBackgroundLoad
         '
         '
+        'loadingStatus
+        '
+        Me.loadingStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.loadingStatus.Location = New System.Drawing.Point(585, 11)
+        Me.loadingStatus.Name = "loadingStatus"
+        Me.loadingStatus.Size = New System.Drawing.Size(177, 23)
+        Me.loadingStatus.TabIndex = 4
+        Me.loadingStatus.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(774, 552)
+        Me.Controls.Add(Me.loadingStatus)
         Me.Controls.Add(Me.pdfErrorLabel)
         Me.Controls.Add(Me.pdfViewer)
         Me.Controls.Add(Me.GroupBox1)
@@ -254,5 +265,6 @@ Partial Class Main
     Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgvBackgroundLoad As System.ComponentModel.BackgroundWorker
+    Friend WithEvents loadingStatus As System.Windows.Forms.Label
 
 End Class

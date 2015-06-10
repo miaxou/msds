@@ -4,6 +4,7 @@ Public Class Main
     Public Declare Auto Function FindExecutable Lib "shell32.dll" (ByVal lpFile As String, ByVal lpDirectory As String, ByVal lpResult As String) As Int32
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadingStatus.Text = "Loading..."
         dgvBackgroundLoad.RunWorkerAsync()
 
         'Set the viewer box default visibility and handle the searchbox
@@ -124,6 +125,7 @@ Public Class Main
     End Sub
 
     Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
+        loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
         ChemTblBindingSource.ResetBindings(False)
     End Sub
 End Class
