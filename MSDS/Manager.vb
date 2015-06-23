@@ -4,6 +4,7 @@
     Public Sub refreshData()
         'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
         Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        ChemTblBindingSource.Sort = "chemMan"
     End Sub
 
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -13,6 +14,7 @@
             'Remove the DB constraints and handle them on save to avoid null exceptions.
             Me.MsdsDBDataSet.EnforceConstraints = False
             Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            ChemTblBindingSource.Sort = "chemMan"
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
@@ -145,5 +147,11 @@
         Else
             Import.Show()
         End If
+    End Sub
+
+    Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
+        For Each dr As DataGridViewRow In msdsEditGrid.SelectedRows
+            msdsEditGrid.Rows.Remove(dr)
+        Next
     End Sub
 End Class
