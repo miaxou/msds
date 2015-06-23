@@ -1,6 +1,11 @@
 ﻿Public Class Manager
     Dim errorState = False
 
+    Public Sub refreshData()
+        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
+        Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+    End Sub
+
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
         'present.
@@ -132,5 +137,13 @@
 
         'Filter datagrid
         ChemTblBindingSource.Filter = "chemName like '%" & searchEditBox.Text & "%' OR chemMan like '%" & searchEditBox.Text & "%'"
+    End Sub
+
+    Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of Import).Any Then
+            MsgBox("Import window already open!")
+        Else
+            Import.Show()
+        End If
     End Sub
 End Class

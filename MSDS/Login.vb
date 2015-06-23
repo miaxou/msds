@@ -39,6 +39,7 @@ Public Class Login
                         Manager.Show()
                         Me.Close()
                     End If
+                    con.Close()
                 End Using
             End Using
         Catch ex As Exception

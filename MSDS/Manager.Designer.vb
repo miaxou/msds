@@ -59,6 +59,8 @@ Partial Class Manager
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.searchEditBox = New System.Windows.Forms.TextBox()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -199,7 +201,7 @@ Partial Class Manager
         Me.dataNavigator.BindingSource = Me.ChemTblBindingSource
         Me.dataNavigator.CountItem = Me.BindingNavigatorCountItem
         Me.dataNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
-        Me.dataNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
+        Me.dataNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
         Me.dataNavigator.Location = New System.Drawing.Point(0, 0)
         Me.dataNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.dataNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -314,12 +316,12 @@ Partial Class Manager
         Me.msdsEditGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.msdsEditGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KeyDataGridViewTextBoxColumn1, Me.ChemNameDataGridViewTextBoxColumn1, Me.ChemManDataGridViewTextBoxColumn1, Me.ChemPathDataGridViewTextBoxColumn1})
         Me.msdsEditGrid.DataSource = Me.ChemTblBindingSource
-        Me.msdsEditGrid.Location = New System.Drawing.Point(0, 54)
+        Me.msdsEditGrid.Location = New System.Drawing.Point(0, 84)
         Me.msdsEditGrid.Name = "msdsEditGrid"
         Me.msdsEditGrid.ReadOnly = True
         Me.msdsEditGrid.RowHeadersVisible = False
         Me.msdsEditGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
+        Me.msdsEditGrid.Size = New System.Drawing.Size(419, 448)
         Me.msdsEditGrid.TabIndex = 10
         '
         'KeyDataGridViewTextBoxColumn1
@@ -355,10 +357,26 @@ Partial Class Manager
         '
         'searchEditBox
         '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 31)
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 58)
         Me.searchEditBox.Name = "searchEditBox"
         Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
         Me.searchEditBox.TabIndex = 0
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(62, 22)
+        Me.ToolStripDropDownButton1.Text = "Options"
+        '
+        'ImportToolStripMenuItem
+        '
+        Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportToolStripMenuItem.Text = "Import..."
         '
         'Manager
         '
@@ -424,4 +442,6 @@ Partial Class Manager
     Friend WithEvents ChemNameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemManDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChemPathDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents ImportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

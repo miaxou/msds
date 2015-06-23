@@ -102,7 +102,6 @@ Public Class Main
         Else
             Login.Show()
         End If
-
     End Sub
 
     Private Sub msdsGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsGrid.KeyDown
