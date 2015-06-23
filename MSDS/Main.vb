@@ -41,6 +41,7 @@ Public Class Main
         'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
         Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         ChemTblBindingSource.Sort = "chemMan"
+        loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
     End Sub
 
     Private Sub searchBox_GotFocus(sender As Object, e As EventArgs) Handles searchBox.GotFocus

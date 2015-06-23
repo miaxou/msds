@@ -44,6 +44,8 @@ Partial Class Manager
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -59,8 +61,6 @@ Partial Class Manager
         Me.ChemManDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.searchEditBox = New System.Windows.Forms.TextBox()
-        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         ChemManLabel = New System.Windows.Forms.Label()
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
@@ -200,7 +200,7 @@ Partial Class Manager
         Me.dataNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
         Me.dataNavigator.BindingSource = Me.ChemTblBindingSource
         Me.dataNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.dataNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.dataNavigator.DeleteItem = Nothing
         Me.dataNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
         Me.dataNavigator.Location = New System.Drawing.Point(0, 0)
         Me.dataNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
@@ -237,6 +237,22 @@ Partial Class Manager
         Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorDeleteItem.Text = "Delete"
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(62, 22)
+        Me.ToolStripDropDownButton1.Text = "Options"
+        '
+        'ImportToolStripMenuItem
+        '
+        Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
+        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
+        Me.ImportToolStripMenuItem.Text = "Import..."
         '
         'BindingNavigatorMoveFirstItem
         '
@@ -361,22 +377,6 @@ Partial Class Manager
         Me.searchEditBox.Name = "searchEditBox"
         Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
         Me.searchEditBox.TabIndex = 0
-        '
-        'ToolStripDropDownButton1
-        '
-        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem})
-        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
-        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(62, 22)
-        Me.ToolStripDropDownButton1.Text = "Options"
-        '
-        'ImportToolStripMenuItem
-        '
-        Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-        Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ImportToolStripMenuItem.Text = "Import..."
         '
         'Manager
         '
