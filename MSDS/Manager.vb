@@ -3,7 +3,7 @@
 
     Public Sub refreshData()
         'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the import screen.
-        ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        ChemTblTableAdapter.Fill(MsdsDBDataSet.chemTbl)
         ChemTblBindingSource.Sort = "chemMan"
     End Sub
 
@@ -19,8 +19,8 @@
         'present.
         Try
             'Remove the DB constraints and handle them on save to avoid null exceptions.
-            MsdsDBDataSet.EnforceConstraints = False
-            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            'MsdsDBDataSet.EnforceConstraints = False
+            ChemTblTableAdapter.Fill(MsdsDBDataSet.chemTbl)
             ChemTblBindingSource.Sort = "chemMan"
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -40,26 +40,21 @@
 
     'Run through all rows/cells and check for empty values.  If found set an error flag and change error state.
     Private Sub errorCheck()
-        If msdsEditGrid.SelectedRows.Count > 0 Then
-            For Each row As DataGridViewRow In msdsEditGrid.Rows
-                For Each cell As DataGridViewCell In row.Cells
-                    If cell.Value.ToString().Length = 0 Then
-                        cell.ErrorText = "Please Enter A Value"
-                        msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
-                    Else
-                        cell.ErrorText = ""
-                        msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
-                    End If
+        For Each row As DataGridViewRow In msdsEditGrid.Rows
+            For Each cell As DataGridViewCell In row.Cells
+                If cell.Value.ToString().Length = 0 Then
+                    cell.ErrorText = "Please Enter A Value"
+                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
+                Else
+                    cell.ErrorText = ""
+                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
+                End If
 
-                    If cell.ErrorText.Length > 0 Then
-                        errorState = True
-                    End If
-                Next
+                If cell.ErrorText.Length > 0 Then
+                    errorState = True
+                End If
             Next
-        Else
-            errorState = True
-        End If
-
+        Next
     End Sub
 
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
