@@ -9,8 +9,8 @@ Public Class Import
         'present.
         Try
             'Remove the DB constraints and handle them on save to avoid null exceptions.
-            Me.MsdsDBDataSet.EnforceConstraints = False
-            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            MsdsDBDataSet.EnforceConstraints = False
+            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
@@ -23,29 +23,23 @@ Public Class Import
         Next
     End Sub
 
-    Private Sub ChemTblBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
-        Me.Validate()
-        Me.ChemTblBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.MsdsDBDataSet)
-
-    End Sub
-
     Private Sub cancelBtn_Click(sender As Object, e As EventArgs) Handles cancelBtn.Click
         MsdsDBDataSet.RejectChanges()
         Me.Close()
     End Sub
 
     Private Sub importList_DragDrop(sender As Object, e As DragEventArgs) Handles importList.DragDrop
+        'Handle drag and drop of files.
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
-            Dim MyFiles() As String = e.Data.GetData(DataFormats.FileDrop)
-            Dim PathName As String
+            Dim PathName() As String = e.Data.GetData(DataFormats.FileDrop)
+            Dim FileName As String
             Dim i As Integer
 
-            ' Loop through the array and add the files to the list.
-            For i = 0 To MyFiles.Length - 1
-                PathName = Path.GetFileNameWithoutExtension(MyFiles(i))
-                If Not Me.importList.Items.Cast(Of ListViewItem)().Any(Function(lvi) lvi.Text = PathName) Then
-                    importList.Items.Add(New ListViewItem(New String() {PathName, MyFiles(i)}))
+            ' Loop through the array and add the files to the listview.  Update import count.
+            For i = 0 To PathName.Length - 1
+                FileName = Path.GetFileNameWithoutExtension(PathName(i))
+                If Not Me.importList.Items.Cast(Of ListViewItem)().Any(Function(lvi) lvi.Text = FileName) Then
+                    importList.Items.Add(New ListViewItem(New String() {FileName, PathName(i)}))
                     importCount = importCount + 1
                 End If
             Next
@@ -54,12 +48,14 @@ Public Class Import
     End Sub
 
     Private Sub importList_DragEnter(sender As Object, e As DragEventArgs) Handles importList.DragEnter
+        'Visual cue for drag and drop of files.
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.All
         End If
     End Sub
 
     Private Sub importList_KeyDown(sender As Object, e As KeyEventArgs) Handles importList.KeyDown
+        'Handle delete key to work for removing files from the list
         If e.KeyCode = Keys.Delete Then
             For Each i As ListViewItem In importList.SelectedItems
                 importList.Items.Remove(i)
@@ -70,33 +66,33 @@ Public Class Import
     End Sub
 
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
+        'Handle updating of database/validation
         If importList.Items.Count > 0 And chemManTextBox.Text <> "" Then
+            'Disable save button to prevent multiple clicks
             saveBtn.Enabled = False
 
-            Dim prodName As String
-            Dim path As String
+            'Set connection string from App settings
             Dim connectionString As String = My.Settings.msdsDBConnectionString
-            Dim mSQL As String
 
             Try
-                For Each i As ListViewItem In importList.Items
-                    prodName = i.SubItems(0).Text
-                    path = i.SubItems(1).Text
+                Using con As New SQLiteConnection(connectionString)
+                    Using cmd As New SQLiteCommand("INSERT INTO chemTBL (chemMan, chemName, chemPath) VALUES (@manText, @prodText, @pathText)", con)
 
-                    'MsgBox(prodName & " AND " & path)
+                        con.Open()
 
-                    mSQL = "INSERT INTO chemTBL (chemMan, chemName, chemPath) VALUES ('" & chemManTextBox.Text & "','" & prodName & "','" & path & "')"
+                        For Each i As ListViewItem In importList.Items
+                            'Add command parameters and set their value
+                            cmd.Parameters.Add("@manText", Data.DbType.String).Value = chemManTextBox.Text
+                            cmd.Parameters.Add("@prodText", Data.DbType.String).Value = i.SubItems(0).Text
+                            cmd.Parameters.Add("@pathText", Data.DbType.String).Value = i.SubItems(1).Text
 
-                    Using con As New SQLiteConnection(connectionString)
-                        Using cmd As New SQLiteCommand(mSQL, con)
-                            con.Open()
+                            'Execute
                             cmd.ExecuteNonQuery()
-                            con.Close()
-                        End Using
+                        Next
                     End Using
-                Next
+                End Using
             Catch ex As Exception
-                MsgBox(ex)
+                MsgBox(ex.Message)
             End Try
 
             ChemTblTableAdapter.Update(MsdsDBDataSet)
@@ -104,8 +100,10 @@ Public Class Import
             Manager.refreshData()
             Me.Close()
 
+        ElseIf chemManTextBox.Text = "" Then
+            MessageBox.Show("Manufacturer field must be completed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            MessageBox.Show("Make sure all fields are completed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Please add files to be imported before saving!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 End Class

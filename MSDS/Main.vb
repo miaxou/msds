@@ -1,13 +1,12 @@
 ﻿Imports System.IO
 
 Public Class Main
-    Public Declare Auto Function FindExecutable Lib "shell32.dll" (ByVal lpFile As String, ByVal lpDirectory As String, ByVal lpResult As String) As Int32
-
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadingStatus.Text = "Loading..."
+        'Split the database call to a separate thread so the application appears to open quicker.
         dgvBackgroundLoad.RunWorkerAsync()
 
-        'Set the viewer box default visibility and handle the searchbox
+        'Set the viewer box default visibility and handle the searchbox text
         pdfViewer.Visible = False
         searchBox.Text = "Search..."
         searchBox.ForeColor = Color.Gray
@@ -16,16 +15,15 @@ Public Class Main
     Private Sub displayPDF()
         'Check if referenced file exists and, if so, show it.  If not show the error instead.
         If File.Exists(msdsGrid.CurrentRow.Cells(3).Value) Then
-            'Check to see if a PDF reader is available before opening file.
-            Dim intRetval As Integer = FindExecutable(msdsGrid.CurrentRow.Cells(3).Value, "", "")
+            pdfViewer.Visible = True
+            pdfErrorLabel.Visible = False
 
-            If intRetval <= 32 Then
+            'Try to show the file, if failed assume PDF reader is missing and try to catch that gracefully.
+            Try
+                pdfViewer.LoadFile(msdsGrid.CurrentRow.Cells(3).Value)
+            Catch ex As Exception
                 MessageBox.Show("An acceptable PDF Reader, which is required to view this file, may not be installed.", "PDF Reader Not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Else
-                pdfViewer.Visible = True
-                pdfErrorLabel.Visible = False
-                Me.pdfViewer.LoadFile(msdsGrid.CurrentRow.Cells(3).Value)
-            End If
+            End Try
         ElseIf msdsGrid.CurrentRow.Cells(3).Value = "" Then
             pdfViewer.Visible = False
             pdfErrorLabel.Text = "No path to PDF available."
@@ -38,13 +36,14 @@ Public Class Main
     End Sub
 
     Public Sub refreshData()
-        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
-        Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager or import screen.
+        ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         ChemTblBindingSource.Sort = "chemMan"
         loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
     End Sub
 
     Private Sub searchBox_GotFocus(sender As Object, e As EventArgs) Handles searchBox.GotFocus
+        'Remove the search text and set the color back to default when this has focus.
         If searchBox.Text = "Search..." Then
             searchBox.Text = ""
             searchBox.ForeColor = Color.Black
@@ -73,6 +72,7 @@ Public Class Main
     End Sub
 
     Private Sub searchBox_LostFocus(sender As Object, e As EventArgs) Handles searchBox.LostFocus
+        'When they leave the searchbox and it's empty, set the search text back to default
         If searchBox.Text = "" Then
             searchBox.Text = "Search..."
             searchBox.ForeColor = Color.Gray
@@ -80,6 +80,7 @@ Public Class Main
     End Sub
 
     Private Sub searchBox_TextChanged(sender As Object, e As EventArgs) Handles searchBox.TextChanged
+        'Don't filter based on the default text
         If searchBox.Text = "Search..." Then
             Exit Sub
         End If
@@ -90,6 +91,7 @@ Public Class Main
     End Sub
 
     Private Sub msdsGrid_DoubleClick(sender As Object, e As EventArgs) Handles msdsGrid.DoubleClick
+        'Handle doubleclick on grid.
         displayPDF()
     End Sub
 
@@ -98,6 +100,7 @@ Public Class Main
     End Sub
 
     Private Sub ManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManagerToolStripMenuItem.Click
+        'Prevent multiple instances of the manager window from spawning.
         If Application.OpenForms().OfType(Of Manager).Any Then
             MsgBox("Manager window already open!")
         Else
@@ -106,6 +109,7 @@ Public Class Main
     End Sub
 
     Private Sub msdsGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsGrid.KeyDown
+        'Handle enter key from grid.
         If e.KeyCode = Keys.Enter Then
             displayPDF()
             e.SuppressKeyPress = True
@@ -116,7 +120,7 @@ Public Class Main
         'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
         'present.
         Try
-            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
             ChemTblBindingSource.Sort = "chemMan"
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -125,6 +129,7 @@ Public Class Main
     End Sub
 
     Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
+        'Once the background worker completes show the record count and reset bindingsource.
         loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
         ChemTblBindingSource.ResetBindings(False)
     End Sub

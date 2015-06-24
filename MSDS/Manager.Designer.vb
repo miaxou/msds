@@ -43,7 +43,6 @@ Partial Class Manager
         Me.dataNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -54,6 +53,7 @@ Partial Class Manager
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
         Me.browseBtn = New System.Windows.Forms.Button()
         Me.msdsEditGrid = New System.Windows.Forms.DataGridView()
         Me.KeyDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -229,15 +229,6 @@ Partial Class Manager
         Me.BindingNavigatorCountItem.Text = "of {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
         '
-        'BindingNavigatorDeleteItem
-        '
-        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorDeleteItem.Text = "Delete"
-        '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
@@ -314,6 +305,15 @@ Partial Class Manager
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
         '
+        'BindingNavigatorDeleteItem
+        '
+        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
+        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorDeleteItem.Text = "Delete"
+        '
         'browseBtn
         '
         Me.browseBtn.Location = New System.Drawing.Point(809, 163)
@@ -332,12 +332,12 @@ Partial Class Manager
         Me.msdsEditGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.msdsEditGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KeyDataGridViewTextBoxColumn1, Me.ChemNameDataGridViewTextBoxColumn1, Me.ChemManDataGridViewTextBoxColumn1, Me.ChemPathDataGridViewTextBoxColumn1})
         Me.msdsEditGrid.DataSource = Me.ChemTblBindingSource
-        Me.msdsEditGrid.Location = New System.Drawing.Point(0, 84)
+        Me.msdsEditGrid.Location = New System.Drawing.Point(0, 54)
         Me.msdsEditGrid.Name = "msdsEditGrid"
         Me.msdsEditGrid.ReadOnly = True
         Me.msdsEditGrid.RowHeadersVisible = False
         Me.msdsEditGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.msdsEditGrid.Size = New System.Drawing.Size(419, 448)
+        Me.msdsEditGrid.Size = New System.Drawing.Size(419, 478)
         Me.msdsEditGrid.TabIndex = 10
         '
         'KeyDataGridViewTextBoxColumn1
@@ -373,7 +373,7 @@ Partial Class Manager
         '
         'searchEditBox
         '
-        Me.searchEditBox.Location = New System.Drawing.Point(0, 58)
+        Me.searchEditBox.Location = New System.Drawing.Point(0, 28)
         Me.searchEditBox.Name = "searchEditBox"
         Me.searchEditBox.Size = New System.Drawing.Size(419, 20)
         Me.searchEditBox.TabIndex = 0

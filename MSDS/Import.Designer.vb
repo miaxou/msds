@@ -164,6 +164,7 @@ Partial Class Import
         Me.Controls.Add(Me.stepOne)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Import"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Import"
         CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

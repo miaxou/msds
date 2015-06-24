@@ -24,12 +24,14 @@ Public Class Login
         saveBtn.Enabled = False
 
         Dim connectionString As String = My.Settings.msdsDBConnectionString
-        Dim mSQL As String = "SELECT Count(*) FROM usersTbl WHERE pw = '" & getMd5Hash(passwordEntry.Text) & "'"
+        Dim mSQL As String = "SELECT Count(*) FROM usersTbl WHERE pw = @passText"
 
         Try
             Using con As New SQLiteConnection(connectionString)
                 Using cmd As New SQLiteCommand(mSQL, con)
                     con.Open()
+                    cmd.Parameters.Add("@passText", Data.DbType.String).Value = getMd5Hash(passwordEntry.Text)
+
                     Dim i As String = cmd.ExecuteScalar
 
                     If i = "0" Then
@@ -39,7 +41,6 @@ Public Class Login
                         Manager.Show()
                         Me.Close()
                     End If
-                    con.Close()
                 End Using
             End Using
         Catch ex As Exception

@@ -3,8 +3,15 @@
 
     Public Sub refreshData()
         'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
-        Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+        ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         ChemTblBindingSource.Sort = "chemMan"
+    End Sub
+
+    Private Sub deleteFunction()
+        'Handle delete function to allow for deletion of multiple rows
+        For Each dr As DataGridViewRow In msdsEditGrid.SelectedRows
+            msdsEditGrid.Rows.Remove(dr)
+        Next
     End Sub
 
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -12,8 +19,8 @@
         'present.
         Try
             'Remove the DB constraints and handle them on save to avoid null exceptions.
-            Me.MsdsDBDataSet.EnforceConstraints = False
-            Me.ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+            MsdsDBDataSet.EnforceConstraints = False
+            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
             ChemTblBindingSource.Sort = "chemMan"
         Catch ex As SQLite.SQLiteException
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -104,6 +111,7 @@
     End Sub
 
     Private Sub searchEditBox_GotFocus(sender As Object, e As EventArgs) Handles searchEditBox.GotFocus
+        'Remove the search text and set the color back to default when this has focus.
         If searchEditBox.Text = "Search..." Then
             searchEditBox.Text = ""
             searchEditBox.ForeColor = Color.Black
@@ -111,6 +119,7 @@
     End Sub
 
     Private Sub searchEditBox_KeyDown(sender As Object, e As KeyEventArgs) Handles searchEditBox.KeyDown
+        'Allow use of arrow keys while the searchbox has focus for convienence sake.
         Select Case e.KeyCode
             Case Keys.Down
                 If msdsEditGrid.CurrentRow.Index < msdsEditGrid.Rows.Count - 1 Then
@@ -126,6 +135,7 @@
     End Sub
 
     Private Sub searchEditBox_LostFocus(sender As Object, e As EventArgs) Handles searchEditBox.LostFocus
+        'When they leave the searchbox and it's empty, set the search text back to default
         If searchEditBox.Text = "" Then
             searchEditBox.Text = "Search..."
             searchEditBox.ForeColor = Color.Gray
@@ -133,6 +143,7 @@
     End Sub
 
     Private Sub searchEditBox_TextChanged(sender As Object, e As EventArgs) Handles searchEditBox.TextChanged
+        'Don't filter based on the default text
         If searchEditBox.Text = "Search..." Then
             Exit Sub
         End If
@@ -142,6 +153,7 @@
     End Sub
 
     Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
+        'Prevent multiple instances of the import window from spawning.
         If Application.OpenForms().OfType(Of Import).Any Then
             MsgBox("Import window already open!")
         Else
@@ -150,8 +162,12 @@
     End Sub
 
     Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
-        For Each dr As DataGridViewRow In msdsEditGrid.SelectedRows
-            msdsEditGrid.Rows.Remove(dr)
-        Next
+        deleteFunction()
+    End Sub
+
+    Private Sub msdsEditGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsEditGrid.KeyDown
+        If e.KeyCode = Keys.Delete Then
+            deleteFunction()
+        End If
     End Sub
 End Class
