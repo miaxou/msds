@@ -2,7 +2,7 @@
     Dim errorState = False
 
     Public Sub refreshData()
-        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager screen.
+        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the import screen.
         ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
         ChemTblBindingSource.Sort = "chemMan"
     End Sub

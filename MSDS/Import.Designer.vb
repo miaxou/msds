@@ -22,7 +22,6 @@ Partial Class Import
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Import))
         Me.stepOne = New System.Windows.Forms.Label()
         Me.importList = New System.Windows.Forms.ListView()
@@ -33,12 +32,6 @@ Partial Class Import
         Me.importLabel = New System.Windows.Forms.Label()
         Me.saveBtn = New System.Windows.Forms.Button()
         Me.cancelBtn = New System.Windows.Forms.Button()
-        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
-        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
-        Me.TableAdapterManager = New MSDS.msdsDBDataSetTableAdapters.TableAdapterManager()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'stepOne
@@ -128,26 +121,6 @@ Partial Class Import
         Me.cancelBtn.Text = "Cancel"
         Me.cancelBtn.UseVisualStyleBackColor = True
         '
-        'MsdsDBDataSet
-        '
-        Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
-        Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'ChemTblBindingSource
-        '
-        Me.ChemTblBindingSource.DataMember = "chemTbl"
-        Me.ChemTblBindingSource.DataSource = Me.MsdsDBDataSet
-        '
-        'ChemTblTableAdapter
-        '
-        Me.ChemTblTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.chemTblTableAdapter = Me.ChemTblTableAdapter
-        Me.TableAdapterManager.UpdateOrder = MSDS.msdsDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        '
         'Import
         '
         Me.AcceptButton = Me.saveBtn
@@ -166,8 +139,6 @@ Partial Class Import
         Me.Name = "Import"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Import"
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -179,10 +150,6 @@ Partial Class Import
     Friend WithEvents importLabel As System.Windows.Forms.Label
     Friend WithEvents saveBtn As System.Windows.Forms.Button
     Friend WithEvents cancelBtn As System.Windows.Forms.Button
-    Friend WithEvents MsdsDBDataSet As MSDS.msdsDBDataSet
-    Friend WithEvents ChemTblBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents ChemTblTableAdapter As MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter
-    Friend WithEvents TableAdapterManager As MSDS.msdsDBDataSetTableAdapters.TableAdapterManager
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
 End Class

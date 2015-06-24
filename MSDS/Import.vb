@@ -5,26 +5,14 @@ Public Class Import
     Dim importCount As Integer = 0
 
     Private Sub Import_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
-        'present.
-        Try
-            'Remove the DB constraints and handle them on save to avoid null exceptions.
-            MsdsDBDataSet.EnforceConstraints = False
-            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-        Catch ex As SQLite.SQLiteException
-            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Application.Exit()
-        End Try
-
         'This is populating the autocomplete for the manufacturer row.  This should hopefully help maintain consistency of case and
         'spelling across manufacturers.
-        For Each dr As DataRow In MsdsDBDataSet.chemTbl.Rows
+        For Each dr As DataRow In Manager.MsdsDBDataSet.chemTbl.Rows
             chemManTextBox.AutoCompleteCustomSource.Add(dr("chemMan").ToString())
         Next
     End Sub
 
     Private Sub cancelBtn_Click(sender As Object, e As EventArgs) Handles cancelBtn.Click
-        MsdsDBDataSet.RejectChanges()
         Me.Close()
     End Sub
 
@@ -92,10 +80,10 @@ Public Class Import
                     End Using
                 End Using
             Catch ex As Exception
+                saveBtn.Enabled = True
                 MsgBox(ex.Message)
             End Try
 
-            ChemTblTableAdapter.Update(MsdsDBDataSet)
             Main.refreshData()
             Manager.refreshData()
             Me.Close()
