@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -17,6 +18,7 @@ Public Class Main
         If File.Exists(msdsGrid.CurrentRow.Cells(3).Value) Then
             pdfViewer.Visible = True
             pdfErrorLabel.Visible = False
+            infoLabel.Visible = True
 
             'Try to show the file, if failed assume PDF reader is missing and try to catch that gracefully.
             Try
@@ -28,19 +30,21 @@ Public Class Main
             pdfViewer.Visible = False
             pdfErrorLabel.Text = "No path to PDF available."
             pdfErrorLabel.Visible = True
+            infoLabel.Visible = False
         Else
             pdfViewer.Visible = False
             pdfErrorLabel.Text = msdsGrid.CurrentRow.Cells(3).Value & " could not be found.  Please check the path and try again."
             pdfErrorLabel.Visible = True
+            infoLabel.Visible = False
         End If
     End Sub
 
-    Public Sub refreshData()
-        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager or import screen.
-        ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-        ChemTblBindingSource.Sort = "chemMan"
-        loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
-    End Sub
+    'Public Sub refreshData()
+    '    This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager or import screen.
+    '    ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
+    '    ChemTblBindingSource.Sort = "chemMan"
+    '    loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
+    'End Sub
 
     Private Sub searchBox_GotFocus(sender As Object, e As EventArgs) Handles searchBox.GotFocus
         'Remove the search text and set the color back to default when this has focus.
@@ -85,8 +89,8 @@ Public Class Main
             Exit Sub
         End If
 
-        'Filter datagrid
-        ChemTblBindingSource.Filter = "chemName like '%" & searchBox.Text & "%' OR chemMan like '%" & searchBox.Text & "%'"
+        'Filter DataGrid
+        TblSDSBindingSource.Filter = "sdsName like '%" & searchBox.Text & "%' OR manufacturer like '%" & searchBox.Text & "%'"
 
     End Sub
 
@@ -99,14 +103,14 @@ Public Class Main
         Application.Exit()
     End Sub
 
-    Private Sub ManagerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManagerToolStripMenuItem.Click
-        'Prevent multiple instances of the manager window from spawning.
-        If Application.OpenForms().OfType(Of Manager).Any Then
-            MsgBox("Manager window already open!")
-        Else
-            Login.Show()
-        End If
-    End Sub
+    'Private Sub ManagerToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    '    'Prevent multiple instances of the manager window from spawning.
+    '    If Application.OpenForms().OfType(Of Manager).Any Then
+    '        MsgBox("Manager window already open!")
+    '    Else
+    '        Login.Show()
+    '    End If
+    'End Sub
 
     Private Sub msdsGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsGrid.KeyDown
         'Handle enter key from grid.
@@ -120,9 +124,9 @@ Public Class Main
         'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
         'present.
         Try
-            ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-            ChemTblBindingSource.Sort = "chemMan"
-        Catch ex As SQLite.SQLiteException
+            Me.TblSDSTableAdapter.Fill(Me.SDSDataSet.tblSDS)
+            TblSDSBindingSource.Sort = "sdsName"
+        Catch ex As Exception
             MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Application.Exit()
         End Try
@@ -130,7 +134,12 @@ Public Class Main
 
     Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
         'Once the background worker completes show the record count and reset bindingsource.
-        loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
-        ChemTblBindingSource.ResetBindings(False)
+        loadingStatus.Text = "Loaded " & SDSDataSet.tblSDS.Count & " records"
+        TblSDSBindingSource.ResetBindings(False)
+    End Sub
+
+    Private Sub infoLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles infoLabel.LinkClicked
+        Dim infoFrm As New Info(Me.SDSDataSet, msdsGrid.CurrentRow.Cells(0).Value)
+        infoFrm.ShowDialog()
     End Sub
 End Class

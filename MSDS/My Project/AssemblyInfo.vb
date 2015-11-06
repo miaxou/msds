@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("MSDS")> 
-<Assembly: AssemblyDescription("MSDS DB Application : Christopher Smith")> 
-<Assembly: AssemblyCompany("Midstate Berkshire")> 
-<Assembly: AssemblyProduct("MSDS")> 
-<Assembly: AssemblyCopyright("Copyright © Midstate Berkshire 2015")> 
+<Assembly: AssemblyTitle("SDS")>
+<Assembly: AssemblyDescription("SDS DB Application : Christopher Smith")>
+<Assembly: AssemblyCompany("Berkshire Industries")>
+<Assembly: AssemblyProduct("SDS")>
+<Assembly: AssemblyCopyright("Copyright © Berkshire Industries 2015")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("7b47ec94-f294-4000-85d5-0792689e86d9")> 
+<Assembly: Guid("7b47ec94-f294-4000-85d5-0792689e86d9")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("2.0.0.0")>
+<Assembly: AssemblyFileVersion("2.0.0.0")>

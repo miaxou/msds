@@ -32,11 +32,8 @@ Partial Class Manager
         Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
-        Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.saveBtn = New System.Windows.Forms.Button()
         Me.cancelBtn = New System.Windows.Forms.Button()
-        Me.TableAdapterManager = New MSDS.msdsDBDataSetTableAdapters.TableAdapterManager()
         Me.ChemManTextBox = New System.Windows.Forms.TextBox()
         Me.ChemNameTextBox = New System.Windows.Forms.TextBox()
         Me.ChemPathTextBox = New System.Windows.Forms.TextBox()
@@ -65,7 +62,6 @@ Partial Class Manager
         ChemNameLabel = New System.Windows.Forms.Label()
         ChemPathLabel = New System.Windows.Forms.Label()
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dataNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.dataNavigator.SuspendLayout()
         CType(Me.msdsEditGrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,20 +127,6 @@ Partial Class Manager
         Me.ChemPathDataGridViewTextBoxColumn.ReadOnly = True
         Me.ChemPathDataGridViewTextBoxColumn.Visible = False
         '
-        'ChemTblBindingSource
-        '
-        Me.ChemTblBindingSource.DataMember = "chemTbl"
-        Me.ChemTblBindingSource.DataSource = Me.MsdsDBDataSet
-        '
-        'MsdsDBDataSet
-        '
-        Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
-        Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'ChemTblTableAdapter
-        '
-        Me.ChemTblTableAdapter.ClearBeforeFill = True
-        '
         'saveBtn
         '
         Me.saveBtn.Location = New System.Drawing.Point(809, 498)
@@ -162,12 +144,6 @@ Partial Class Manager
         Me.cancelBtn.TabIndex = 5
         Me.cancelBtn.Text = "Cancel"
         Me.cancelBtn.UseVisualStyleBackColor = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.chemTblTableAdapter = Me.ChemTblTableAdapter
-        Me.TableAdapterManager.UpdateOrder = MSDS.msdsDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'ChemManTextBox
         '
@@ -401,7 +377,6 @@ Partial Class Manager
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "MSDS Manager"
         CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dataNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.dataNavigator.ResumeLayout(False)
         Me.dataNavigator.PerformLayout()
@@ -411,12 +386,9 @@ Partial Class Manager
 
     End Sub
     Friend WithEvents msdsEditGrid As System.Windows.Forms.DataGridView
-    Friend WithEvents MsdsDBDataSet As MSDS.msdsDBDataSet
     Friend WithEvents ChemTblBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents ChemTblTableAdapter As MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter
     Friend WithEvents saveBtn As System.Windows.Forms.Button
     Friend WithEvents cancelBtn As System.Windows.Forms.Button
-    Friend WithEvents TableAdapterManager As MSDS.msdsDBDataSetTableAdapters.TableAdapterManager
     Friend WithEvents ChemManTextBox As System.Windows.Forms.TextBox
     Friend WithEvents ChemNameTextBox As System.Windows.Forms.TextBox
     Friend WithEvents ChemPathTextBox As System.Windows.Forms.TextBox

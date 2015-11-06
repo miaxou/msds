@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,36 +20,36 @@ Partial Class Main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.searchBox = New System.Windows.Forms.TextBox()
         Me.msdsGrid = New System.Windows.Forms.DataGridView()
-        Me.KeyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemManDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemPathDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChemTblBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MsdsDBDataSet = New MSDS.msdsDBDataSet()
+        Me.pdfPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pdfViewer = New AxAcroPDFLib.AxAcroPDF()
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
-        Me.ChemTblTableAdapter = New MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter()
         Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
         Me.loadingStatus = New System.Windows.Forms.Label()
+        Me.infoLabel = New System.Windows.Forms.LinkLabel()
+        Me.SdsIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SdsNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ManufacturerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TblSDSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SDSDataSet = New SDS.SDSDataSet()
+        Me.TblSDSTableAdapter = New SDS.SDSDataSetTableAdapters.tblSDSTableAdapter()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -84,8 +84,8 @@ Partial Class Main
         Me.msdsGrid.BackgroundColor = System.Drawing.SystemColors.Control
         Me.msdsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.msdsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.msdsGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KeyDataGridViewTextBoxColumn, Me.ChemNameDataGridViewTextBoxColumn, Me.ChemManDataGridViewTextBoxColumn, Me.ChemPathDataGridViewTextBoxColumn})
-        Me.msdsGrid.DataSource = Me.ChemTblBindingSource
+        Me.msdsGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SdsIDDataGridViewTextBoxColumn, Me.SdsNameDataGridViewTextBoxColumn, Me.ManufacturerDataGridViewTextBoxColumn, Me.pdfPath})
+        Me.msdsGrid.DataSource = Me.TblSDSBindingSource
         Me.msdsGrid.Location = New System.Drawing.Point(6, 45)
         Me.msdsGrid.MultiSelect = False
         Me.msdsGrid.Name = "msdsGrid"
@@ -95,49 +95,14 @@ Partial Class Main
         Me.msdsGrid.Size = New System.Drawing.Size(297, 462)
         Me.msdsGrid.TabIndex = 1
         '
-        'KeyDataGridViewTextBoxColumn
+        'pdfPath
         '
-        Me.KeyDataGridViewTextBoxColumn.DataPropertyName = "key"
-        Me.KeyDataGridViewTextBoxColumn.HeaderText = "key"
-        Me.KeyDataGridViewTextBoxColumn.Name = "KeyDataGridViewTextBoxColumn"
-        Me.KeyDataGridViewTextBoxColumn.ReadOnly = True
-        Me.KeyDataGridViewTextBoxColumn.Visible = False
-        Me.KeyDataGridViewTextBoxColumn.Width = 30
-        '
-        'ChemNameDataGridViewTextBoxColumn
-        '
-        Me.ChemNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ChemNameDataGridViewTextBoxColumn.DataPropertyName = "chemName"
-        Me.ChemNameDataGridViewTextBoxColumn.HeaderText = "Product Name"
-        Me.ChemNameDataGridViewTextBoxColumn.Name = "ChemNameDataGridViewTextBoxColumn"
-        Me.ChemNameDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ChemManDataGridViewTextBoxColumn
-        '
-        Me.ChemManDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ChemManDataGridViewTextBoxColumn.DataPropertyName = "chemMan"
-        Me.ChemManDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
-        Me.ChemManDataGridViewTextBoxColumn.Name = "ChemManDataGridViewTextBoxColumn"
-        Me.ChemManDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ChemPathDataGridViewTextBoxColumn
-        '
-        Me.ChemPathDataGridViewTextBoxColumn.DataPropertyName = "chemPath"
-        Me.ChemPathDataGridViewTextBoxColumn.HeaderText = "chemPath"
-        Me.ChemPathDataGridViewTextBoxColumn.Name = "ChemPathDataGridViewTextBoxColumn"
-        Me.ChemPathDataGridViewTextBoxColumn.ReadOnly = True
-        Me.ChemPathDataGridViewTextBoxColumn.Visible = False
-        Me.ChemPathDataGridViewTextBoxColumn.Width = 80
-        '
-        'ChemTblBindingSource
-        '
-        Me.ChemTblBindingSource.DataMember = "chemTbl"
-        Me.ChemTblBindingSource.DataSource = Me.MsdsDBDataSet
-        '
-        'MsdsDBDataSet
-        '
-        Me.MsdsDBDataSet.DataSetName = "msdsDBDataSet"
-        Me.MsdsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.pdfPath.DataPropertyName = "pdfPath"
+        Me.pdfPath.HeaderText = "pdfPath"
+        Me.pdfPath.Name = "pdfPath"
+        Me.pdfPath.ReadOnly = True
+        Me.pdfPath.Visible = False
+        Me.pdfPath.Width = 69
         '
         'MenuStrip1
         '
@@ -151,16 +116,10 @@ Partial Class Main
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManagerToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
-        '
-        'ManagerToolStripMenuItem
-        '
-        Me.ManagerToolStripMenuItem.Name = "ManagerToolStripMenuItem"
-        Me.ManagerToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
-        Me.ManagerToolStripMenuItem.Text = "Manager"
         '
         'ExitToolStripMenuItem
         '
@@ -174,10 +133,10 @@ Partial Class Main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pdfViewer.Enabled = True
-        Me.pdfViewer.Location = New System.Drawing.Point(327, 37)
+        Me.pdfViewer.Location = New System.Drawing.Point(327, 46)
         Me.pdfViewer.Name = "pdfViewer"
         Me.pdfViewer.OcxState = CType(resources.GetObject("pdfViewer.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.pdfViewer.Size = New System.Drawing.Size(435, 503)
+        Me.pdfViewer.Size = New System.Drawing.Size(435, 494)
         Me.pdfViewer.TabIndex = 2
         Me.pdfViewer.TabStop = False
         '
@@ -204,10 +163,6 @@ Partial Class Main
         '
         Me.EventLog1.SynchronizingObject = Me
         '
-        'ChemTblTableAdapter
-        '
-        Me.ChemTblTableAdapter.ClearBeforeFill = True
-        '
         'dgvBackgroundLoad
         '
         '
@@ -220,11 +175,65 @@ Partial Class Main
         Me.loadingStatus.TabIndex = 4
         Me.loadingStatus.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
+        'infoLabel
+        '
+        Me.infoLabel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.infoLabel.AutoSize = True
+        Me.infoLabel.Location = New System.Drawing.Point(657, 30)
+        Me.infoLabel.Name = "infoLabel"
+        Me.infoLabel.Size = New System.Drawing.Size(105, 13)
+        Me.infoLabel.TabIndex = 5
+        Me.infoLabel.TabStop = True
+        Me.infoLabel.Text = "Chemical Information"
+        Me.infoLabel.Visible = False
+        Me.infoLabel.VisitedLinkColor = System.Drawing.Color.Blue
+        '
+        'SdsIDDataGridViewTextBoxColumn
+        '
+        Me.SdsIDDataGridViewTextBoxColumn.DataPropertyName = "sdsID"
+        Me.SdsIDDataGridViewTextBoxColumn.HeaderText = "sdsID"
+        Me.SdsIDDataGridViewTextBoxColumn.Name = "SdsIDDataGridViewTextBoxColumn"
+        Me.SdsIDDataGridViewTextBoxColumn.ReadOnly = True
+        Me.SdsIDDataGridViewTextBoxColumn.Visible = False
+        Me.SdsIDDataGridViewTextBoxColumn.Width = 40
+        '
+        'SdsNameDataGridViewTextBoxColumn
+        '
+        Me.SdsNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.SdsNameDataGridViewTextBoxColumn.DataPropertyName = "sdsName"
+        Me.SdsNameDataGridViewTextBoxColumn.HeaderText = "Chemical Name"
+        Me.SdsNameDataGridViewTextBoxColumn.Name = "SdsNameDataGridViewTextBoxColumn"
+        Me.SdsNameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ManufacturerDataGridViewTextBoxColumn
+        '
+        Me.ManufacturerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ManufacturerDataGridViewTextBoxColumn.DataPropertyName = "manufacturer"
+        Me.ManufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
+        Me.ManufacturerDataGridViewTextBoxColumn.Name = "ManufacturerDataGridViewTextBoxColumn"
+        Me.ManufacturerDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TblSDSBindingSource
+        '
+        Me.TblSDSBindingSource.DataMember = "tblSDS"
+        Me.TblSDSBindingSource.DataSource = Me.SDSDataSet
+        '
+        'SDSDataSet
+        '
+        Me.SDSDataSet.DataSetName = "SDSDataSet"
+        Me.SDSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TblSDSTableAdapter
+        '
+        Me.TblSDSTableAdapter.ClearBeforeFill = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(774, 552)
+        Me.Controls.Add(Me.infoLabel)
         Me.Controls.Add(Me.loadingStatus)
         Me.Controls.Add(Me.pdfErrorLabel)
         Me.Controls.Add(Me.pdfViewer)
@@ -237,12 +246,12 @@ Partial Class Main
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ChemTblBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MsdsDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -251,20 +260,19 @@ Partial Class Main
     Friend WithEvents msdsGrid As System.Windows.Forms.DataGridView
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MsdsDBDataSet As MSDS.msdsDBDataSet
-    Friend WithEvents ChemTblBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents ChemTblTableAdapter As MSDS.msdsDBDataSetTableAdapters.chemTblTableAdapter
     Friend WithEvents searchBox As System.Windows.Forms.TextBox
-    Friend WithEvents ManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pdfViewer As AxAcroPDFLib.AxAcroPDF
     Friend WithEvents pdfErrorLabel As System.Windows.Forms.Label
     Friend WithEvents EventLog1 As System.Diagnostics.EventLog
-    Friend WithEvents KeyDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemManDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChemPathDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgvBackgroundLoad As System.ComponentModel.BackgroundWorker
     Friend WithEvents loadingStatus As System.Windows.Forms.Label
-
+    Friend WithEvents SDSDataSet As SDSDataSet
+    Friend WithEvents TblSDSBindingSource As BindingSource
+    Friend WithEvents TblSDSTableAdapter As SDSDataSetTableAdapters.tblSDSTableAdapter
+    Friend WithEvents SdsIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents SdsNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ManufacturerDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents pdfPath As DataGridViewTextBoxColumn
+    Friend WithEvents infoLabel As LinkLabel
 End Class
