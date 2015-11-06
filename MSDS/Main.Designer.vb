@@ -27,7 +27,12 @@ Partial Class Main
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.searchBox = New System.Windows.Forms.TextBox()
         Me.msdsGrid = New System.Windows.Forms.DataGridView()
+        Me.SdsIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SdsNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ManufacturerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pdfPath = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TblSDSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SDSDataSet = New SDS.SDSDataSet()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -37,19 +42,14 @@ Partial Class Main
         Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
         Me.loadingStatus = New System.Windows.Forms.Label()
         Me.infoLabel = New System.Windows.Forms.LinkLabel()
-        Me.SdsIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SdsNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ManufacturerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TblSDSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SDSDataSet = New SDS.SDSDataSet()
         Me.TblSDSTableAdapter = New SDS.SDSDataSetTableAdapters.tblSDSTableAdapter()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -95,6 +95,31 @@ Partial Class Main
         Me.msdsGrid.Size = New System.Drawing.Size(297, 462)
         Me.msdsGrid.TabIndex = 1
         '
+        'SdsIDDataGridViewTextBoxColumn
+        '
+        Me.SdsIDDataGridViewTextBoxColumn.DataPropertyName = "sdsID"
+        Me.SdsIDDataGridViewTextBoxColumn.HeaderText = "sdsID"
+        Me.SdsIDDataGridViewTextBoxColumn.Name = "SdsIDDataGridViewTextBoxColumn"
+        Me.SdsIDDataGridViewTextBoxColumn.ReadOnly = True
+        Me.SdsIDDataGridViewTextBoxColumn.Visible = False
+        Me.SdsIDDataGridViewTextBoxColumn.Width = 40
+        '
+        'SdsNameDataGridViewTextBoxColumn
+        '
+        Me.SdsNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.SdsNameDataGridViewTextBoxColumn.DataPropertyName = "sdsName"
+        Me.SdsNameDataGridViewTextBoxColumn.HeaderText = "Chemical Name"
+        Me.SdsNameDataGridViewTextBoxColumn.Name = "SdsNameDataGridViewTextBoxColumn"
+        Me.SdsNameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ManufacturerDataGridViewTextBoxColumn
+        '
+        Me.ManufacturerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ManufacturerDataGridViewTextBoxColumn.DataPropertyName = "manufacturer"
+        Me.ManufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
+        Me.ManufacturerDataGridViewTextBoxColumn.Name = "ManufacturerDataGridViewTextBoxColumn"
+        Me.ManufacturerDataGridViewTextBoxColumn.ReadOnly = True
+        '
         'pdfPath
         '
         Me.pdfPath.DataPropertyName = "pdfPath"
@@ -103,6 +128,16 @@ Partial Class Main
         Me.pdfPath.ReadOnly = True
         Me.pdfPath.Visible = False
         Me.pdfPath.Width = 69
+        '
+        'TblSDSBindingSource
+        '
+        Me.TblSDSBindingSource.DataMember = "tblSDS"
+        Me.TblSDSBindingSource.DataSource = Me.SDSDataSet
+        '
+        'SDSDataSet
+        '
+        Me.SDSDataSet.DataSetName = "SDSDataSet"
+        Me.SDSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'MenuStrip1
         '
@@ -124,7 +159,7 @@ Partial Class Main
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'pdfViewer
@@ -177,8 +212,7 @@ Partial Class Main
         '
         'infoLabel
         '
-        Me.infoLabel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.infoLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.infoLabel.AutoSize = True
         Me.infoLabel.Location = New System.Drawing.Point(657, 30)
         Me.infoLabel.Name = "infoLabel"
@@ -188,41 +222,6 @@ Partial Class Main
         Me.infoLabel.Text = "Chemical Information"
         Me.infoLabel.Visible = False
         Me.infoLabel.VisitedLinkColor = System.Drawing.Color.Blue
-        '
-        'SdsIDDataGridViewTextBoxColumn
-        '
-        Me.SdsIDDataGridViewTextBoxColumn.DataPropertyName = "sdsID"
-        Me.SdsIDDataGridViewTextBoxColumn.HeaderText = "sdsID"
-        Me.SdsIDDataGridViewTextBoxColumn.Name = "SdsIDDataGridViewTextBoxColumn"
-        Me.SdsIDDataGridViewTextBoxColumn.ReadOnly = True
-        Me.SdsIDDataGridViewTextBoxColumn.Visible = False
-        Me.SdsIDDataGridViewTextBoxColumn.Width = 40
-        '
-        'SdsNameDataGridViewTextBoxColumn
-        '
-        Me.SdsNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.SdsNameDataGridViewTextBoxColumn.DataPropertyName = "sdsName"
-        Me.SdsNameDataGridViewTextBoxColumn.HeaderText = "Chemical Name"
-        Me.SdsNameDataGridViewTextBoxColumn.Name = "SdsNameDataGridViewTextBoxColumn"
-        Me.SdsNameDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ManufacturerDataGridViewTextBoxColumn
-        '
-        Me.ManufacturerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.ManufacturerDataGridViewTextBoxColumn.DataPropertyName = "manufacturer"
-        Me.ManufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer"
-        Me.ManufacturerDataGridViewTextBoxColumn.Name = "ManufacturerDataGridViewTextBoxColumn"
-        Me.ManufacturerDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TblSDSBindingSource
-        '
-        Me.TblSDSBindingSource.DataMember = "tblSDS"
-        Me.TblSDSBindingSource.DataSource = Me.SDSDataSet
-        '
-        'SDSDataSet
-        '
-        Me.SDSDataSet.DataSetName = "SDSDataSet"
-        Me.SDSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'TblSDSTableAdapter
         '
@@ -246,12 +245,12 @@ Partial Class Main
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SDSDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -36,21 +36,21 @@ Partial Class Info
         Me.locationBox = New System.Windows.Forms.ListBox()
         Me.departmentBox = New System.Windows.Forms.ListBox()
         Me.infoBox = New System.Windows.Forms.GroupBox()
-        Me.ManufacturerTextBox = New System.Windows.Forms.TextBox()
+        Me.DateAddedTextBox = New System.Windows.Forms.TextBox()
         Me.TblSDSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SDSDataSet = New SDS.SDSDataSet()
+        Me.PdfPathTextBox = New System.Windows.Forms.TextBox()
+        Me.MroNumTextBox = New System.Windows.Forms.TextBox()
+        Me.IdcNumTextBox = New System.Windows.Forms.TextBox()
+        Me.InBookCheckBox = New System.Windows.Forms.CheckBox()
+        Me.IdcUseCheckBox = New System.Windows.Forms.CheckBox()
+        Me.SupplierTextBox = New System.Windows.Forms.TextBox()
+        Me.ManufacturerTextBox = New System.Windows.Forms.TextBox()
         Me.SdsNameTextBox = New System.Windows.Forms.TextBox()
         Me.departmentLabel = New System.Windows.Forms.Label()
         Me.locationLabel = New System.Windows.Forms.Label()
         Me.TableAdapterManager = New SDS.SDSDataSetTableAdapters.TableAdapterManager()
         Me.TblSDSTableAdapter = New SDS.SDSDataSetTableAdapters.tblSDSTableAdapter()
-        Me.SupplierTextBox = New System.Windows.Forms.TextBox()
-        Me.IdcUseCheckBox = New System.Windows.Forms.CheckBox()
-        Me.InBookCheckBox = New System.Windows.Forms.CheckBox()
-        Me.IdcNumTextBox = New System.Windows.Forms.TextBox()
-        Me.MroNumTextBox = New System.Windows.Forms.TextBox()
-        Me.PdfPathTextBox = New System.Windows.Forms.TextBox()
-        Me.DateAddedTextBox = New System.Windows.Forms.TextBox()
         SdsNameLabel = New System.Windows.Forms.Label()
         ManufacturerLabel = New System.Windows.Forms.Label()
         SupplierLabel = New System.Windows.Forms.Label()
@@ -82,6 +82,69 @@ Partial Class Info
         ManufacturerLabel.Size = New System.Drawing.Size(73, 13)
         ManufacturerLabel.TabIndex = 6
         ManufacturerLabel.Text = "Manufacturer:"
+        '
+        'SupplierLabel
+        '
+        SupplierLabel.AutoSize = True
+        SupplierLabel.Location = New System.Drawing.Point(42, 49)
+        SupplierLabel.Name = "SupplierLabel"
+        SupplierLabel.Size = New System.Drawing.Size(48, 13)
+        SupplierLabel.TabIndex = 8
+        SupplierLabel.Text = "Supplier:"
+        '
+        'DateAddedLabel
+        '
+        DateAddedLabel.AutoSize = True
+        DateAddedLabel.Location = New System.Drawing.Point(329, 49)
+        DateAddedLabel.Name = "DateAddedLabel"
+        DateAddedLabel.Size = New System.Drawing.Size(67, 13)
+        DateAddedLabel.TabIndex = 10
+        DateAddedLabel.Text = "Date Added:"
+        '
+        'IdcUseLabel
+        '
+        IdcUseLabel.AutoSize = True
+        IdcUseLabel.Location = New System.Drawing.Point(40, 76)
+        IdcUseLabel.Name = "IdcUseLabel"
+        IdcUseLabel.Size = New System.Drawing.Size(50, 13)
+        IdcUseLabel.TabIndex = 12
+        IdcUseLabel.Text = "IDC Use:"
+        '
+        'InBookLabel
+        '
+        InBookLabel.AutoSize = True
+        InBookLabel.Location = New System.Drawing.Point(129, 76)
+        InBookLabel.Name = "InBookLabel"
+        InBookLabel.Size = New System.Drawing.Size(47, 13)
+        InBookLabel.TabIndex = 14
+        InBookLabel.Text = "In Book:"
+        '
+        'IdcNumLabel
+        '
+        IdcNumLabel.AutoSize = True
+        IdcNumLabel.Location = New System.Drawing.Point(37, 104)
+        IdcNumLabel.Name = "IdcNumLabel"
+        IdcNumLabel.Size = New System.Drawing.Size(53, 13)
+        IdcNumLabel.TabIndex = 16
+        IdcNumLabel.Text = "IDC Num:"
+        '
+        'MroNumLabel
+        '
+        MroNumLabel.AutoSize = True
+        MroNumLabel.Location = New System.Drawing.Point(30, 130)
+        MroNumLabel.Name = "MroNumLabel"
+        MroNumLabel.Size = New System.Drawing.Size(60, 13)
+        MroNumLabel.TabIndex = 18
+        MroNumLabel.Text = "MRO Num:"
+        '
+        'PdfPathLabel
+        '
+        PdfPathLabel.AutoSize = True
+        PdfPathLabel.Location = New System.Drawing.Point(340, 74)
+        PdfPathLabel.Name = "PdfPathLabel"
+        PdfPathLabel.Size = New System.Drawing.Size(56, 13)
+        PdfPathLabel.TabIndex = 20
+        PdfPathLabel.Text = "PDF Path:"
         '
         'locationBox
         '
@@ -131,14 +194,14 @@ Partial Class Info
         Me.infoBox.TabIndex = 2
         Me.infoBox.TabStop = False
         '
-        'ManufacturerTextBox
+        'DateAddedTextBox
         '
-        Me.ManufacturerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "manufacturer", True))
-        Me.ManufacturerTextBox.Location = New System.Drawing.Point(402, 21)
-        Me.ManufacturerTextBox.Name = "ManufacturerTextBox"
-        Me.ManufacturerTextBox.ReadOnly = True
-        Me.ManufacturerTextBox.Size = New System.Drawing.Size(190, 20)
-        Me.ManufacturerTextBox.TabIndex = 7
+        Me.DateAddedTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "dateAdded", True))
+        Me.DateAddedTextBox.Location = New System.Drawing.Point(402, 46)
+        Me.DateAddedTextBox.Name = "DateAddedTextBox"
+        Me.DateAddedTextBox.ReadOnly = True
+        Me.DateAddedTextBox.Size = New System.Drawing.Size(190, 20)
+        Me.DateAddedTextBox.TabIndex = 23
         '
         'TblSDSBindingSource
         '
@@ -149,6 +212,71 @@ Partial Class Info
         '
         Me.SDSDataSet.DataSetName = "SDSDataSet"
         Me.SDSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PdfPathTextBox
+        '
+        Me.PdfPathTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "pdfPath", True))
+        Me.PdfPathTextBox.Location = New System.Drawing.Point(402, 71)
+        Me.PdfPathTextBox.Name = "PdfPathTextBox"
+        Me.PdfPathTextBox.ReadOnly = True
+        Me.PdfPathTextBox.Size = New System.Drawing.Size(190, 20)
+        Me.PdfPathTextBox.TabIndex = 21
+        '
+        'MroNumTextBox
+        '
+        Me.MroNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "mroNum", True))
+        Me.MroNumTextBox.Location = New System.Drawing.Point(96, 127)
+        Me.MroNumTextBox.Name = "MroNumTextBox"
+        Me.MroNumTextBox.ReadOnly = True
+        Me.MroNumTextBox.Size = New System.Drawing.Size(80, 20)
+        Me.MroNumTextBox.TabIndex = 19
+        '
+        'IdcNumTextBox
+        '
+        Me.IdcNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "idcNum", True))
+        Me.IdcNumTextBox.Location = New System.Drawing.Point(96, 101)
+        Me.IdcNumTextBox.Name = "IdcNumTextBox"
+        Me.IdcNumTextBox.ReadOnly = True
+        Me.IdcNumTextBox.Size = New System.Drawing.Size(80, 20)
+        Me.IdcNumTextBox.TabIndex = 17
+        '
+        'InBookCheckBox
+        '
+        Me.InBookCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.TblSDSBindingSource, "inBook", True))
+        Me.InBookCheckBox.Enabled = False
+        Me.InBookCheckBox.Location = New System.Drawing.Point(182, 71)
+        Me.InBookCheckBox.Name = "InBookCheckBox"
+        Me.InBookCheckBox.Size = New System.Drawing.Size(104, 24)
+        Me.InBookCheckBox.TabIndex = 15
+        Me.InBookCheckBox.UseVisualStyleBackColor = True
+        '
+        'IdcUseCheckBox
+        '
+        Me.IdcUseCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.TblSDSBindingSource, "idcUse", True))
+        Me.IdcUseCheckBox.Enabled = False
+        Me.IdcUseCheckBox.Location = New System.Drawing.Point(96, 71)
+        Me.IdcUseCheckBox.Name = "IdcUseCheckBox"
+        Me.IdcUseCheckBox.Size = New System.Drawing.Size(104, 24)
+        Me.IdcUseCheckBox.TabIndex = 13
+        Me.IdcUseCheckBox.UseVisualStyleBackColor = True
+        '
+        'SupplierTextBox
+        '
+        Me.SupplierTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "supplier", True))
+        Me.SupplierTextBox.Location = New System.Drawing.Point(96, 46)
+        Me.SupplierTextBox.Name = "SupplierTextBox"
+        Me.SupplierTextBox.ReadOnly = True
+        Me.SupplierTextBox.Size = New System.Drawing.Size(190, 20)
+        Me.SupplierTextBox.TabIndex = 9
+        '
+        'ManufacturerTextBox
+        '
+        Me.ManufacturerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "manufacturer", True))
+        Me.ManufacturerTextBox.Location = New System.Drawing.Point(402, 21)
+        Me.ManufacturerTextBox.Name = "ManufacturerTextBox"
+        Me.ManufacturerTextBox.ReadOnly = True
+        Me.ManufacturerTextBox.Size = New System.Drawing.Size(190, 20)
+        Me.ManufacturerTextBox.TabIndex = 7
         '
         'SdsNameTextBox
         '
@@ -190,134 +318,6 @@ Partial Class Info
         'TblSDSTableAdapter
         '
         Me.TblSDSTableAdapter.ClearBeforeFill = True
-        '
-        'SupplierLabel
-        '
-        SupplierLabel.AutoSize = True
-        SupplierLabel.Location = New System.Drawing.Point(42, 49)
-        SupplierLabel.Name = "SupplierLabel"
-        SupplierLabel.Size = New System.Drawing.Size(48, 13)
-        SupplierLabel.TabIndex = 8
-        SupplierLabel.Text = "Supplier:"
-        '
-        'SupplierTextBox
-        '
-        Me.SupplierTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "supplier", True))
-        Me.SupplierTextBox.Location = New System.Drawing.Point(96, 46)
-        Me.SupplierTextBox.Name = "SupplierTextBox"
-        Me.SupplierTextBox.ReadOnly = True
-        Me.SupplierTextBox.Size = New System.Drawing.Size(190, 20)
-        Me.SupplierTextBox.TabIndex = 9
-        '
-        'DateAddedLabel
-        '
-        DateAddedLabel.AutoSize = True
-        DateAddedLabel.Location = New System.Drawing.Point(329, 49)
-        DateAddedLabel.Name = "DateAddedLabel"
-        DateAddedLabel.Size = New System.Drawing.Size(67, 13)
-        DateAddedLabel.TabIndex = 10
-        DateAddedLabel.Text = "Date Added:"
-        '
-        'IdcUseLabel
-        '
-        IdcUseLabel.AutoSize = True
-        IdcUseLabel.Location = New System.Drawing.Point(40, 76)
-        IdcUseLabel.Name = "IdcUseLabel"
-        IdcUseLabel.Size = New System.Drawing.Size(50, 13)
-        IdcUseLabel.TabIndex = 12
-        IdcUseLabel.Text = "IDC Use:"
-        '
-        'IdcUseCheckBox
-        '
-        Me.IdcUseCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.TblSDSBindingSource, "idcUse", True))
-        Me.IdcUseCheckBox.Enabled = False
-        Me.IdcUseCheckBox.Location = New System.Drawing.Point(96, 71)
-        Me.IdcUseCheckBox.Name = "IdcUseCheckBox"
-        Me.IdcUseCheckBox.Size = New System.Drawing.Size(104, 24)
-        Me.IdcUseCheckBox.TabIndex = 13
-        Me.IdcUseCheckBox.UseVisualStyleBackColor = True
-        '
-        'InBookLabel
-        '
-        InBookLabel.AutoSize = True
-        InBookLabel.Location = New System.Drawing.Point(129, 76)
-        InBookLabel.Name = "InBookLabel"
-        InBookLabel.Size = New System.Drawing.Size(47, 13)
-        InBookLabel.TabIndex = 14
-        InBookLabel.Text = "In Book:"
-        '
-        'InBookCheckBox
-        '
-        Me.InBookCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.TblSDSBindingSource, "inBook", True))
-        Me.InBookCheckBox.Enabled = False
-        Me.InBookCheckBox.Location = New System.Drawing.Point(182, 71)
-        Me.InBookCheckBox.Name = "InBookCheckBox"
-        Me.InBookCheckBox.Size = New System.Drawing.Size(104, 24)
-        Me.InBookCheckBox.TabIndex = 15
-        Me.InBookCheckBox.UseVisualStyleBackColor = True
-        '
-        'IdcNumLabel
-        '
-        IdcNumLabel.AutoSize = True
-        IdcNumLabel.Location = New System.Drawing.Point(37, 104)
-        IdcNumLabel.Name = "IdcNumLabel"
-        IdcNumLabel.Size = New System.Drawing.Size(53, 13)
-        IdcNumLabel.TabIndex = 16
-        IdcNumLabel.Text = "IDC Num:"
-        '
-        'IdcNumTextBox
-        '
-        Me.IdcNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "idcNum", True))
-        Me.IdcNumTextBox.Location = New System.Drawing.Point(96, 101)
-        Me.IdcNumTextBox.Name = "IdcNumTextBox"
-        Me.IdcNumTextBox.ReadOnly = True
-        Me.IdcNumTextBox.Size = New System.Drawing.Size(80, 20)
-        Me.IdcNumTextBox.TabIndex = 17
-        '
-        'MroNumLabel
-        '
-        MroNumLabel.AutoSize = True
-        MroNumLabel.Location = New System.Drawing.Point(30, 130)
-        MroNumLabel.Name = "MroNumLabel"
-        MroNumLabel.Size = New System.Drawing.Size(60, 13)
-        MroNumLabel.TabIndex = 18
-        MroNumLabel.Text = "MRO Num:"
-        '
-        'MroNumTextBox
-        '
-        Me.MroNumTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "mroNum", True))
-        Me.MroNumTextBox.Location = New System.Drawing.Point(96, 127)
-        Me.MroNumTextBox.Name = "MroNumTextBox"
-        Me.MroNumTextBox.ReadOnly = True
-        Me.MroNumTextBox.Size = New System.Drawing.Size(80, 20)
-        Me.MroNumTextBox.TabIndex = 19
-        '
-        'PdfPathLabel
-        '
-        PdfPathLabel.AutoSize = True
-        PdfPathLabel.Location = New System.Drawing.Point(340, 74)
-        PdfPathLabel.Name = "PdfPathLabel"
-        PdfPathLabel.Size = New System.Drawing.Size(56, 13)
-        PdfPathLabel.TabIndex = 20
-        PdfPathLabel.Text = "PDF Path:"
-        '
-        'PdfPathTextBox
-        '
-        Me.PdfPathTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "pdfPath", True))
-        Me.PdfPathTextBox.Location = New System.Drawing.Point(402, 71)
-        Me.PdfPathTextBox.Name = "PdfPathTextBox"
-        Me.PdfPathTextBox.ReadOnly = True
-        Me.PdfPathTextBox.Size = New System.Drawing.Size(190, 20)
-        Me.PdfPathTextBox.TabIndex = 21
-        '
-        'DateAddedTextBox
-        '
-        Me.DateAddedTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSDSBindingSource, "dateAdded", True))
-        Me.DateAddedTextBox.Location = New System.Drawing.Point(402, 46)
-        Me.DateAddedTextBox.Name = "DateAddedTextBox"
-        Me.DateAddedTextBox.ReadOnly = True
-        Me.DateAddedTextBox.Size = New System.Drawing.Size(190, 20)
-        Me.DateAddedTextBox.TabIndex = 23
         '
         'Info
         '

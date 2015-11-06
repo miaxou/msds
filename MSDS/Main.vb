@@ -139,6 +139,7 @@ Public Class Main
     End Sub
 
     Private Sub infoLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles infoLabel.LinkClicked
+        'Code to pass dataset and sdsID to the info form.
         Dim infoFrm As New Info(Me.SDSDataSet, msdsGrid.CurrentRow.Cells(0).Value)
         infoFrm.ShowDialog()
     End Sub
