@@ -35,14 +35,16 @@ Partial Class Main
         Me.SDSDataSet = New SDS.SDSDataSet()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManageMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pdfViewer = New AxAcroPDFLib.AxAcroPDF()
         Me.pdfErrorLabel = New System.Windows.Forms.Label()
         Me.EventLog1 = New System.Diagnostics.EventLog()
         Me.dgvBackgroundLoad = New System.ComponentModel.BackgroundWorker()
-        Me.loadingStatus = New System.Windows.Forms.Label()
         Me.infoLabel = New System.Windows.Forms.LinkLabel()
         Me.TblSDSTableAdapter = New SDS.SDSDataSetTableAdapters.tblSDSTableAdapter()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblSDSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,6 +52,7 @@ Partial Class Main
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -60,7 +63,7 @@ Partial Class Main
         Me.GroupBox1.Controls.Add(Me.msdsGrid)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 27)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(309, 513)
+        Me.GroupBox1.Size = New System.Drawing.Size(309, 500)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
@@ -92,7 +95,7 @@ Partial Class Main
         Me.msdsGrid.ReadOnly = True
         Me.msdsGrid.RowHeadersVisible = False
         Me.msdsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.msdsGrid.Size = New System.Drawing.Size(297, 462)
+        Me.msdsGrid.Size = New System.Drawing.Size(297, 449)
         Me.msdsGrid.TabIndex = 1
         '
         'SdsIDDataGridViewTextBoxColumn
@@ -151,15 +154,21 @@ Partial Class Main
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManageMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
+        'ManageMenuItem
+        '
+        Me.ManageMenuItem.Name = "ManageMenuItem"
+        Me.ManageMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ManageMenuItem.Text = "Manager..."
+        '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'pdfViewer
@@ -171,20 +180,17 @@ Partial Class Main
         Me.pdfViewer.Location = New System.Drawing.Point(327, 46)
         Me.pdfViewer.Name = "pdfViewer"
         Me.pdfViewer.OcxState = CType(resources.GetObject("pdfViewer.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.pdfViewer.Size = New System.Drawing.Size(435, 494)
+        Me.pdfViewer.Size = New System.Drawing.Size(435, 481)
         Me.pdfViewer.TabIndex = 2
         Me.pdfViewer.TabStop = False
         '
         'pdfErrorLabel
         '
-        Me.pdfErrorLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pdfErrorLabel.AutoSize = True
         Me.pdfErrorLabel.BackColor = System.Drawing.SystemColors.Control
         Me.pdfErrorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pdfErrorLabel.ForeColor = System.Drawing.Color.Red
-        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 273)
+        Me.pdfErrorLabel.Location = New System.Drawing.Point(327, 272)
         Me.pdfErrorLabel.MaximumSize = New System.Drawing.Size(435, 0)
         Me.pdfErrorLabel.MinimumSize = New System.Drawing.Size(435, 0)
         Me.pdfErrorLabel.Name = "pdfErrorLabel"
@@ -200,15 +206,6 @@ Partial Class Main
         '
         'dgvBackgroundLoad
         '
-        '
-        'loadingStatus
-        '
-        Me.loadingStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.loadingStatus.Location = New System.Drawing.Point(585, 11)
-        Me.loadingStatus.Name = "loadingStatus"
-        Me.loadingStatus.Size = New System.Drawing.Size(177, 23)
-        Me.loadingStatus.TabIndex = 4
-        Me.loadingStatus.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'infoLabel
         '
@@ -227,13 +224,27 @@ Partial Class Main
         '
         Me.TblSDSTableAdapter.ClearBeforeFill = True
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 530)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(774, 22)
+        Me.StatusStrip1.TabIndex = 6
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(0, 17)
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(774, 552)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.infoLabel)
-        Me.Controls.Add(Me.loadingStatus)
         Me.Controls.Add(Me.pdfErrorLabel)
         Me.Controls.Add(Me.pdfViewer)
         Me.Controls.Add(Me.GroupBox1)
@@ -241,7 +252,7 @@ Partial Class Main
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Main"
-        Me.Text = "MSDS"
+        Me.Text = "SDS"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.msdsGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -251,6 +262,8 @@ Partial Class Main
         Me.MenuStrip1.PerformLayout()
         CType(Me.pdfViewer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -265,7 +278,6 @@ Partial Class Main
     Friend WithEvents pdfErrorLabel As System.Windows.Forms.Label
     Friend WithEvents EventLog1 As System.Diagnostics.EventLog
     Friend WithEvents dgvBackgroundLoad As System.ComponentModel.BackgroundWorker
-    Friend WithEvents loadingStatus As System.Windows.Forms.Label
     Friend WithEvents SDSDataSet As SDSDataSet
     Friend WithEvents TblSDSBindingSource As BindingSource
     Friend WithEvents TblSDSTableAdapter As SDSDataSetTableAdapters.tblSDSTableAdapter
@@ -274,4 +286,7 @@ Partial Class Main
     Friend WithEvents ManufacturerDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents pdfPath As DataGridViewTextBoxColumn
     Friend WithEvents infoLabel As LinkLabel
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents ManageMenuItem As ToolStripMenuItem
 End Class

@@ -1,108 +1,34 @@
-﻿Public Class Manager
-    Dim errorState = False
+﻿Imports System.ComponentModel
 
-    Public Sub refreshData()
-        'This initiates a call back to the DB to pull new data, only referenced when updates are saved on the import screen.
-        ChemTblTableAdapter.Fill(MsdsDBDataSet.chemTbl)
-        ChemTblBindingSource.Sort = "chemMan"
-    End Sub
+Public Class Manager
+    Dim newCount As Integer = 0
 
     Private Sub deleteFunction()
         'Handle delete function to allow for deletion of multiple rows
-        For Each dr As DataGridViewRow In msdsEditGrid.SelectedRows
-            msdsEditGrid.Rows.Remove(dr)
-        Next
+        Dim delConfirmation As Integer = MessageBox.Show("Are you sure you want to delete the selected row(s)?", "Delete", MessageBoxButtons.YesNo)
+
+        If delConfirmation = DialogResult.Yes Then
+            For Each dr As DataGridViewRow In TblSDSDataGridView.SelectedRows
+                TblSDSDataGridView.Rows.Remove(dr)
+            Next
+        End If
     End Sub
 
     Private Sub Manager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Try to initiate the database.  If not throw a friendly error and exit gracefully.  Most likely this is caused by the DB not being
-        'present.
-        Try
-            'Remove the DB constraints and handle them on save to avoid null exceptions.
-            'MsdsDBDataSet.EnforceConstraints = False
-            ChemTblTableAdapter.Fill(MsdsDBDataSet.chemTbl)
-            ChemTblBindingSource.Sort = "chemMan"
-        Catch ex As SQLite.SQLiteException
-            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Application.Exit()
-        End Try
-
-        'This is populating the autocomplete for the manufacturer row.  This should hopefully help maintain consistency of case and
-        'spelling across manufacturers.
-        For Each dr As DataRow In MsdsDBDataSet.chemTbl.Rows
-            ChemManTextBox.AutoCompleteCustomSource.Add(dr("chemMan").ToString())
-        Next
+        TblSDSTableAdapter.Fill(SDSDataSet.tblSDS)
+        TblSDSBindingSource.Sort = "sdsName"
 
         'Handle searchbox
         searchEditBox.Text = "Search..."
         searchEditBox.ForeColor = Color.Gray
     End Sub
 
-    'Run through all rows/cells and check for empty values.  If found set an error flag and change error state.
-    Private Sub errorCheck()
-        For Each row As DataGridViewRow In msdsEditGrid.Rows
-            For Each cell As DataGridViewCell In row.Cells
-                If cell.Value.ToString().Length = 0 Then
-                    cell.ErrorText = "Please Enter A Value"
-                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = "Please Enter A Value"
-                Else
-                    cell.ErrorText = ""
-                    msdsEditGrid.Rows(cell.RowIndex).ErrorText = ""
-                End If
-
-                If cell.ErrorText.Length > 0 Then
-                    errorState = True
-                End If
-            Next
-        Next
-    End Sub
-
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
-        'Disable multiple save clicks
-        saveBtn.Enabled = False
-        'Hack-y way to force the datagrid to update.  We're clearing the filter and forcing moves which ensures
-        'that the datagrid will be updated when error checking is performed.  Probably (hopefully) a better way to handle this.
-        dataNavigator.MovePreviousItem.PerformClick()
-        dataNavigator.MoveNextItem.PerformClick()
-        errorCheck()
-
-        'If error state is false update the dataset, refresh the data on the main form, and close the manager
-        If errorState = False Then
-            ChemTblTableAdapter.Update(MsdsDBDataSet)
-            Main.refreshData()
-            Me.Close()
-            'If an error is found reset everything and prompt for correction.
-        Else
-            MessageBox.Show("Please correct validation errors before saving!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            errorState = False
-            saveBtn.Enabled = True
-        End If
+        saveFunction()
     End Sub
 
     Private Sub cancelBtn_Click(sender As Object, e As EventArgs) Handles cancelBtn.Click
-        MsdsDBDataSet.RejectChanges()
-        Me.Close()
-    End Sub
-
-    Private Sub browseBtn_Click(sender As Object, e As EventArgs) Handles browseBtn.Click
-        'Open file dialog to make filling in the path easy.  Initial directory if blank will get you to the root of the MSDS folder,
-        'otherwise it'll open in the directory currently set.
-        Dim fd As OpenFileDialog = New OpenFileDialog()
-
-        fd.Title = "Open File Dialog"
-        If ChemPathTextBox.Text = "" Then
-            fd.InitialDirectory = My.Settings.startingPath
-        Else
-            fd.InitialDirectory = ChemPathTextBox.Text.Substring(0, ChemPathTextBox.Text.LastIndexOf("\"))
-        End If
-
-        fd.Filter = "PDF File (*.PDF)|*.PDF|All files (*.*)|*.*"
-        fd.FilterIndex = 1
-        fd.RestoreDirectory = True
-
-        If fd.ShowDialog() = DialogResult.OK Then
-            ChemPathTextBox.Text = fd.FileName
-        End If
+        cancelFunction()
     End Sub
 
     Private Sub searchEditBox_GotFocus(sender As Object, e As EventArgs) Handles searchEditBox.GotFocus
@@ -117,13 +43,13 @@
         'Allow use of arrow keys while the searchbox has focus for convienence sake.
         Select Case e.KeyCode
             Case Keys.Down
-                If msdsEditGrid.CurrentRow.Index < msdsEditGrid.Rows.Count - 1 Then
-                    msdsEditGrid.CurrentCell = msdsEditGrid(msdsEditGrid.CurrentCell.ColumnIndex, msdsEditGrid.CurrentCell.RowIndex + 1)
+                If TblSDSDataGridView.CurrentRow.Index < TblSDSDataGridView.Rows.Count - 1 Then
+                    TblSDSDataGridView.CurrentCell = TblSDSDataGridView(TblSDSDataGridView.CurrentCell.ColumnIndex, TblSDSDataGridView.CurrentCell.RowIndex + 1)
                 End If
                 e.Handled = True
             Case Keys.Up
-                If msdsEditGrid.CurrentRow.Index > 0 Then
-                    msdsEditGrid.CurrentCell = msdsEditGrid(msdsEditGrid.CurrentCell.ColumnIndex, msdsEditGrid.CurrentCell.RowIndex - 1)
+                If TblSDSDataGridView.CurrentRow.Index > 0 Then
+                    TblSDSDataGridView.CurrentCell = TblSDSDataGridView(TblSDSDataGridView.CurrentCell.ColumnIndex, TblSDSDataGridView.CurrentCell.RowIndex - 1)
                 End If
                 e.Handled = True
         End Select
@@ -144,25 +70,62 @@
         End If
 
         'Filter datagrid
-        ChemTblBindingSource.Filter = "chemName like '%" & searchEditBox.Text & "%' OR chemMan like '%" & searchEditBox.Text & "%'"
+        TblSDSBindingSource.Filter = "sdsName like '%" & searchEditBox.Text & "%' OR manufacturer like '%" & searchEditBox.Text & "%'"
     End Sub
 
-    Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
-        'Prevent multiple instances of the import window from spawning.
-        If Application.OpenForms().OfType(Of Import).Any Then
-            MsgBox("Import window already open!")
-        Else
-            Import.Show()
-        End If
-    End Sub
-
-    Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
-        deleteFunction()
-    End Sub
-
-    Private Sub msdsEditGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsEditGrid.KeyDown
+    Private Sub TblSDSDataGridView_KeyDown(sender As Object, e As KeyEventArgs) Handles TblSDSDataGridView.KeyDown
         If e.KeyCode = Keys.Delete Then
             deleteFunction()
         End If
+    End Sub
+
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        saveFunction()
+    End Sub
+    Private Sub CancelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelToolStripMenuItem.Click
+        cancelFunction()
+    End Sub
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        deleteFunction()
+    End Sub
+
+    Private Sub AddNewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddNewToolStripMenuItem.Click
+        addFunction()
+    End Sub
+
+    Private Sub saveFunction()
+        TblSDSTableAdapter.Update(SDSDataSet)
+        Main.refreshData()
+        Me.Close()
+    End Sub
+
+    Private Sub cancelFunction()
+        SDSDataSet.RejectChanges()
+        Me.Close()
+    End Sub
+
+    Private Sub editFunction()
+        Dim editFrm As New infoFrm(Me.SDSDataSet, TblSDSDataGridView.CurrentRow.Cells(0).Value)
+        editFrm.ShowDialog(Me)
+    End Sub
+
+    Private Sub addFunction()
+        newCount = newCount - 1
+        TblSDSBindingSource.Filter = ""
+        TblSDSBindingSource.AddNew()
+        TblSDSBindingSource.EndEdit()
+
+        Dim editFrm As New infoFrm(Me.SDSDataSet, newCount)
+        editFrm.ShowDialog(Me)
+
+        TblSDSBindingSource.Filter = "sdsName like '%" & searchEditBox.Text & "%' OR manufacturer like '%" & searchEditBox.Text & "%'"
+    End Sub
+
+    Private Sub EditRecToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditRecToolStripMenuItem.Click
+        editFunction()
+    End Sub
+
+    Private Sub TblSDSDataGridView_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles TblSDSDataGridView.CellDoubleClick
+        editFunction()
     End Sub
 End Class

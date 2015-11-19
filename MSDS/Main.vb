@@ -3,7 +3,7 @@ Imports System.IO
 
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        loadingStatus.Text = "Loading..."
+        ToolStripStatusLabel1.Text = "Loading..."
         'Split the database call to a separate thread so the application appears to open quicker.
         dgvBackgroundLoad.RunWorkerAsync()
 
@@ -39,12 +39,17 @@ Public Class Main
         End If
     End Sub
 
-    'Public Sub refreshData()
-    '    This initiates a call back to the DB to pull new data, only referenced when updates are saved on the manager or import screen.
-    '    ChemTblTableAdapter.Fill(Me.MsdsDBDataSet.chemTbl)
-    '    ChemTblBindingSource.Sort = "chemMan"
-    '    loadingStatus.Text = "Loaded " & MsdsDBDataSet.chemTbl.Count & " records"
-    'End Sub
+    Public Sub refreshData()
+        Try
+            Me.TblSDSTableAdapter.Fill(Me.SDSDataSet.tblSDS)
+            TblSDSBindingSource.Sort = "sdsName"
+        Catch ex As Exception
+            MessageBox.Show("Database error encountered!", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit()
+        End Try
+
+        ToolStripStatusLabel1.Text = "Loaded " & SDSDataSet.tblSDS.Count & " records"
+    End Sub
 
     Private Sub searchBox_GotFocus(sender As Object, e As EventArgs) Handles searchBox.GotFocus
         'Remove the search text and set the color back to default when this has focus.
@@ -103,15 +108,6 @@ Public Class Main
         Application.Exit()
     End Sub
 
-    'Private Sub ManagerToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    '    'Prevent multiple instances of the manager window from spawning.
-    '    If Application.OpenForms().OfType(Of Manager).Any Then
-    '        MsgBox("Manager window already open!")
-    '    Else
-    '        Login.Show()
-    '    End If
-    'End Sub
-
     Private Sub msdsGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles msdsGrid.KeyDown
         'Handle enter key from grid.
         If e.KeyCode = Keys.Enter Then
@@ -134,13 +130,21 @@ Public Class Main
 
     Private Sub dgvBackgroundLoad_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles dgvBackgroundLoad.RunWorkerCompleted
         'Once the background worker completes show the record count and reset bindingsource.
-        loadingStatus.Text = "Loaded " & SDSDataSet.tblSDS.Count & " records"
+        ToolStripStatusLabel1.Text = "Loaded " & SDSDataSet.tblSDS.Count & " records"
         TblSDSBindingSource.ResetBindings(False)
     End Sub
 
     Private Sub infoLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles infoLabel.LinkClicked
         'Code to pass dataset and sdsID to the info form.
-        Dim infoFrm As New Info(Me.SDSDataSet, msdsGrid.CurrentRow.Cells(0).Value)
-        infoFrm.ShowDialog()
+        Dim infoFrm As New infoFrm(Me.SDSDataSet, msdsGrid.CurrentRow.Cells(0).Value)
+        infoFrm.ShowDialog(Me)
+    End Sub
+
+    Private Sub ManageMenuItem_Click(sender As Object, e As EventArgs) Handles ManageMenuItem.Click
+        If Application.OpenForms().OfType(Of Manager).Any Then
+            MsgBox("Manager window already open!")
+        Else
+            Login.Show()
+        End If
     End Sub
 End Class

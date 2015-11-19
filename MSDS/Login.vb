@@ -1,5 +1,4 @@
-﻿Imports System.Data.SQLite
-Imports System.Security.Cryptography
+﻿Imports System.Security.Cryptography
 Imports System.Text
 
 Public Class Login
@@ -20,32 +19,36 @@ Public Class Login
         Me.Close()
     End Sub
 
-    Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
-        saveBtn.Enabled = False
+    Private Sub loginBtn_Click(sender As Object, e As EventArgs) Handles loginBtn.Click
+        loginBtn.Enabled = False
 
-        Dim connectionString As String = My.Settings.msdsDBConnectionString
-        Dim mSQL As String = "SELECT Count(*) FROM usersTbl WHERE pw = @passText"
+        Dim Connection As OleDb.OleDbConnection = New OleDb.OleDbConnection(My.Settings.SDSConnectionString)
+        Dim Command As New OleDb.OleDbCommand
+        Dim connectionString As String = My.Settings.SDSConnectionString
+        Dim pwQuery As String = "SELECT Count(*) FROM tblManager WHERE userPIN = @passText"
 
         Try
-            Using con As New SQLiteConnection(connectionString)
-                Using cmd As New SQLiteCommand(mSQL, con)
+            Using con As New OleDb.OleDbConnection(connectionString)
+                Using cmd As New OleDb.OleDbCommand(pwQuery, con)
                     con.Open()
-                    cmd.Parameters.Add("@passText", Data.DbType.String).Value = getMd5Hash(passwordEntry.Text)
+                    cmd.Parameters.Add("@passText", OleDb.OleDbType.VarChar).Value = getMd5Hash(passwordEntry.Text)
 
                     Dim i As String = cmd.ExecuteScalar
 
                     If i = "0" Then
-                        saveBtn.Enabled = True
+                        loginBtn.Enabled = True
                         MessageBox.Show("Incorrect Password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Else
                         Manager.Show()
                         Me.Close()
                     End If
+
                 End Using
             End Using
+
+
         Catch ex As Exception
-            saveBtn.Enabled = True
-            MsgBox(ex.Message)
+            MsgBox("ex.Message")
         End Try
     End Sub
 End Class

@@ -78,12 +78,27 @@
     <ManifestKeyFile>MSDS_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.AcroPDFLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\AxInterop.AcroPDFLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.AcroPDFLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Interop.AcroPDFLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -107,24 +122,36 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="departmentFrm.Designer.vb">
+      <DependentUpon>departmentFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="departmentFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="locationFrm.Designer.vb">
+      <DependentUpon>locationFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="locationFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Import.Designer.vb">
       <DependentUpon>Import.vb</DependentUpon>
     </Compile>
     <None Include="Import.vb">
       <SubType>Form</SubType>
     </None>
-    <Compile Include="Info.Designer.vb">
-      <DependentUpon>Info.vb</DependentUpon>
+    <Compile Include="infoFrm.Designer.vb">
+      <DependentUpon>infoFrm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Info.vb">
+    <Compile Include="infoFrm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
-    <None Include="Login.vb">
+    <Compile Include="Login.vb">
       <SubType>Form</SubType>
-    </None>
+    </Compile>
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +162,9 @@
     <Compile Include="Manager.Designer.vb">
       <DependentUpon>Manager.vb</DependentUpon>
     </Compile>
-    <None Include="Manager.vb">
+    <Compile Include="Manager.vb">
       <SubType>Form</SubType>
-    </None>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -162,6 +189,7 @@
       <DependentUpon>SDSDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
+    <None Include="My Project\app.manifest" />
     <None Include="SDSDataSet.xsc">
       <DependentUpon>SDSDataSet.xsd</DependentUpon>
     </None>
@@ -175,11 +203,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="departmentFrm.resx">
+      <DependentUpon>departmentFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Import.resx">
       <DependentUpon>Import.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Info.resx">
-      <DependentUpon>Info.vb</DependentUpon>
+    <EmbeddedResource Include="infoFrm.resx">
+      <DependentUpon>infoFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="locationFrm.resx">
+      <DependentUpon>locationFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -192,9 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -234,26 +268,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="AxAcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="MSDS Icon.ico" />
+    <None Include="onebit_31.png" />
+    <None Include="onebit_33.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets')" />

@@ -23,7 +23,7 @@ Partial Class Login
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.passwordEntry = New System.Windows.Forms.TextBox()
-        Me.saveBtn = New System.Windows.Forms.Button()
+        Me.loginBtn = New System.Windows.Forms.Button()
         Me.cancelBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -36,14 +36,14 @@ Partial Class Login
         Me.passwordEntry.TabIndex = 0
         Me.passwordEntry.UseSystemPasswordChar = True
         '
-        'saveBtn
+        'loginBtn
         '
-        Me.saveBtn.Location = New System.Drawing.Point(127, 59)
-        Me.saveBtn.Name = "saveBtn"
-        Me.saveBtn.Size = New System.Drawing.Size(75, 23)
-        Me.saveBtn.TabIndex = 1
-        Me.saveBtn.Text = "Login"
-        Me.saveBtn.UseVisualStyleBackColor = True
+        Me.loginBtn.Location = New System.Drawing.Point(127, 59)
+        Me.loginBtn.Name = "loginBtn"
+        Me.loginBtn.Size = New System.Drawing.Size(75, 23)
+        Me.loginBtn.TabIndex = 1
+        Me.loginBtn.Text = "Login"
+        Me.loginBtn.UseVisualStyleBackColor = True
         '
         'cancelBtn
         '
@@ -57,18 +57,20 @@ Partial Class Login
         '
         'Login
         '
-        Me.AcceptButton = Me.saveBtn
+        Me.AcceptButton = Me.loginBtn
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.cancelBtn
         Me.ClientSize = New System.Drawing.Size(248, 115)
         Me.Controls.Add(Me.cancelBtn)
-        Me.Controls.Add(Me.saveBtn)
+        Me.Controls.Add(Me.loginBtn)
         Me.Controls.Add(Me.passwordEntry)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Login"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Login"
         Me.ResumeLayout(False)
@@ -76,6 +78,6 @@ Partial Class Login
 
     End Sub
     Friend WithEvents passwordEntry As System.Windows.Forms.TextBox
-    Friend WithEvents saveBtn As System.Windows.Forms.Button
+    Friend WithEvents loginBtn As System.Windows.Forms.Button
     Friend WithEvents cancelBtn As System.Windows.Forms.Button
 End Class
